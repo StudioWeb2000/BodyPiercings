@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coyotes Tattoo — Donde el arte cobra vida</title>
+  <meta name="description" content="Tatuajes y piercings únicos en Miraflores, Lima. Profesionales, seguros y artísticos." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* Lightbox */
+    #lightbox {
+      display:none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      z-index: 11000;
+      text-align: center;
+    }
+    .lightbox-inner {
+      position: relative;
+      display: inline-block;
+      max-width: 90%;
+      max-height: 85%;
+    }
+    .lightbox-image {
+      display: block;
+      max-width: 100%;
+      max-height: 85vh;
+      border-radius: 12px;
+      background: #0b0b0b;
+      padding: 8px;
+      object-fit: contain;
+      box-shadow: 0 0 30px rgba(255,215,0,0.95),
+                  0 0 60px rgba(255,215,0,0.45),
+                  0 25px 60px rgba(0,0,0,0.6);
+    }
+    .lightbox-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 3rem;
+      color: #ffd662;
+      cursor: pointer;
+      z-index: 20000;
+      opacity: 0.9;
+      padding: 10px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      text-shadow: 0 0 12px rgba(255,215,0,0.9);
+      transition: transform .18s ease, opacity .18s ease;
+      user-select: none;
+    }
+    .lightbox-arrow:hover {
+      transform: translateY(-50%) scale(1.1);
+      opacity: 1;
+    }
+    .lightbox-arrow.left { left: 20px; }
+    .lightbox-arrow.right { right: 20px; }
+    .lightbox-close {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+      z-index: 21000;
+    }
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 border-b" style="background-color:#0a0f2c; border-color:#0a0f2c;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center gap-3">
+          <img src="logo coyotes tattoo.png" alt="Logo" class="w-10 h-10 rounded object-cover">
+          <div class="font-semibold text-white">Coyotes Tattoo</div>
+        </a>
+        <button id="menuBtn" class="md:hidden p-2 border rounded">☰</button>
+      </div>
+      <div id="mobileMenu" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm">
+          <a href="#facebook" class="py-2">Facebook</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección Equipo -->
+  <section id="team" class="py-16 bg-white text-gray-900">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-4xl font-extrabold text-center mb-12">Nuestro Equipo</h2>
+      <div class="flex flex-wrap justify-center gap-10">
+
+        <!-- Artista Angela -->
+        <div onclick="openArtist('angela')" class="cursor-pointer rounded-xl p-6 transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl w-64 text-center">
+          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#0a0f2c;">
+            <img src="img/oro/1.jpg" class="w-full h-full rounded-full object-cover" alt="Angela">
+          </div>
+          <h3 class="mt-6 text-xl font-semibold">ANGELA</h3>
+          <p class="text-gray-600 text-sm">Artista del piercing</p>
+        </div>
+
+        <!-- Artista Kiara -->
+        <div onclick="openArtist('kiara')" class="cursor-pointer rounded-xl p-6 transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl w-64 text-center">
+          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#0a0f2c;">
+            <img src="img/titanioo/16.jpg" class="w-full h-full rounded-full object-cover" alt="Kiara">
+          </div>
+          <h3 class="mt-6 text-xl font-semibold">Kiara</h3>
+          <p class="text-gray-600 text-sm">Artista del piercing</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal detalle artista -->
+  <div id="artistModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    <div class="bg-gray-900 text-white max-w-5xl w-full rounded-2xl overflow-hidden p-8 relative shadow-2xl">
+      <button onclick="closeArtist()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl">✕</button>
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <div>
+          <img id="artistPhoto" src="" class="w-full h-96 object-cover rounded-xl shadow-lg">
+        </div>
+        <div>
+          <h3 id="artistName" class="text-3xl font-bold"></h3>
+          <p id="artistDesc" class="text-gray-300 mt-3"></p>
+          <div id="artistGallery" class="grid grid-cols-2 gap-3 mt-6"></div>
+          <div id="artistRating" class="mt-6"></div>
+          <a id="artistLink" href="#" target="_blank" 
+          
+          class="inline-block mt-6 px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400 text-white rounded-lg shadow-md transition transform hover:scale-105">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="closeLightbox" class="lightbox-close">✕</button>
+    <button id="prevImg" class="lightbox-arrow left">❮</button>
+    <div class="lightbox-inner">
+      <img id="lightboxImg" class="lightbox-image" src="" alt="Imagen ampliada">
+    </div>
+    <button id="nextImg" class="lightbox-arrow right">❯</button>
+  </div>
+
+  <script>
+    const artists = {
+      angela: {
+        name: "ANGELA",
+        desc: "Artista del piercing con experiencia en estilos modernos y seguros.",
+        photo: "img/oro/1.jpg",
+        gallery: ["p1.png","img/p2.png","img/p3.png","p4.png"],
+        link: "artist-kiara.html"  
+      },
+      kiara: {
+        name: "KIARA",
+        desc: "Artista especializada en piercings y tatuajes minimalistas.",
+        photo: "bd.jpg",
+        gallery: ["img/pc1.png","img/pc2.png","img/pc3.png","img/pc4.png"],
+        link: "artist-ventoso.html"  
+      }
+    };
+
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    function openArtist(key){
+      const art = artists[key];
+      document.getElementById("artistPhoto").src = art.photo;
+      document.getElementById("artistName").textContent = art.name;
+      document.getElementById("artistDesc").textContent = art.desc;
+      const gal = document.getElementById("artistGallery");
+      gal.innerHTML = "";
+      currentGallery = art.gallery;
+      art.gallery.forEach((img, i) => {
+        gal.innerHTML += `<img src="${img}" class="w-full h-28 object-cover rounded-lg shadow-md cursor-pointer" onclick="openLightbox(${i})">`;
+      });
+      document.getElementById("artistLink").href = art.link;
+      document.getElementById("artistModal").classList.remove("hidden");
+    }
+
+    function closeArtist(){
+      document.getElementById("artistModal").classList.add("hidden");
+    }
+
+    function openLightbox(i){
+      currentIndex = i;
+      document.getElementById("lightboxImg").src = currentGallery[i];
+      document.getElementById("lightbox").style.display = "flex";
+    }
+
+    document.getElementById("closeLightbox").addEventListener("click", () => {
+      document.getElementById("lightbox").style.display = "none";
+    });
+    document.getElementById("nextImg").addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % currentGallery.length;
+      document.getElementById("lightboxImg").src = currentGallery[currentIndex];
+    });
+    document.getElementById("prevImg").addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      document.getElementById("lightboxImg").src = currentGallery[currentIndex];
+    });
+  </script>
+
+
+<!-- SECCIÓN DE ESTADÍSTICAS -->
+<section class="bg-black text-white py-16 flex justify-center items-center">
+  <div class="bg-gray-900 rounded-2xl shadow-2xl p-10 w-full max-w-3xl text-center">
+    <h2 class="text-3xl font-bold mb-10">Nuestros Logros</h2>
+
+    <div class="grid grid-cols-2 gap-10">
+
+      <!-- Clientes atendidos -->
+      <div class="flex flex-col items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-yellow-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a4 4 0 00-4-4h-1m-6 6H2v-2a4 4 0 014-4h1m6 6V10a4 4 0 10-8 0v10m8 0V10a4 4 0 118 0v10" />
+        </svg>
+        <span class="counter text-4xl font-bold text-yellow-400" data-target="2500">0</span>
+        <p class="mt-2">Clientes felices</p>
+      </div>
+
+      <!-- Piercings realizados -->
+      <div class="flex flex-col items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-pink-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L15 12l-5.25-5" />
+        </svg>
+        <span class="counter text-4xl font-bold text-pink-400" data-target="1200">0</span>
+        <p class="mt-2">Piercings realizados</p>
+      </div>
+
+      <!-- Años de experiencia -->
+      <div class="flex flex-col items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-green-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span class="counter text-4xl font-bold text-green-400" data-target="5">0</span>
+        <p class="mt-2">Años de experiencia</p>
+      </div>
+
+      <!-- Seguidores Instagram -->
+      <div class="flex flex-col items-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12 text-purple-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 16h10M9 12h6m-7 8a9 9 0 100-18 9 9 0 000 18z" />
+        </svg>
+        <span class="counter text-4xl font-bold text-purple-400" data-target="8000">0</span>
+        <p class="mt-2">Seguidores en Instagram</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCRIPT PARA ANIMAR CONTADORES -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach(counter => {
+    const update = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / 200; // velocidad
+      if(count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(update, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    update();
+  });
+});
+</script>
+
+  <!-- Footer -->
+<footer style="background:#111; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
+    
+    <!-- Redes Sociales -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Redes Sociales</h3>
+      <a href="https://www.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/coyotestattooperu/" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
+        Instagram
+      </a>
+    </div>
+
+    <!-- Mapa -->
+   <!-- Ubicación -->
+<!-- Ubicación Coyotes Tattoo -->
+<div style="flex:2; min-width:200px; text-align:center; margin:10px;">
+  <h3 style="margin-bottom:10px; font-size:16px;">Ubicación</h3>
+  <iframe 
+    src="https://www.google.com/maps?q=C.+Bajada+Balta+127,+Miraflores+15074&output=embed"
+    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+  <p style="margin-top:5px;">C. Bajada Balta 127, Miraflores 15074</p>
+</div>
+
+    <!-- Contacto -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Contacto</h3>
+      <p style="margin:2px 0;">Tel: +51 987 654 321</p>
+      <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>
+      <p style="margin:2px 0;">Dirección: Bajada Balta 127 y 135, Lima</p>
+    </div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:15px; font-size:12px;">&copy; 2025 Coyote Tattoo Perú</p>
+</footer>
+
+<!-- CSS para efecto de oscilación -->
+<style>
+  footer a:hover {
+    transform: rotate(-5deg) scale(1.1);
+  }
+</style>
+
+</body>
+</html>

@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+   <script src="https://cdn.tailwindcss.com"></script>
+  <title>Orfebrería Aurora — Joyería Fina</title>
+
+  <!-- Tipografías elegantes -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+   background: #ffffff;
+
+      --surface:#0a0f2c;
+      --surface-2:#00BFFF;
+      --text:#0a0f2c;
+      --muted:#ffffff;
+      --gold:#0f0f10;
+      --gold-2:#b6902f;
+      --ring:rgba(212,175,55,0.25);
+      --radius:18px;
+      --gap:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+    }
+
+    .p-name {
+  color: #000000; /* negro */
+}
+
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    img{display:block;max-width:100%;height:auto}
+
+
+
+ /* muestra el contenido del data-desc  .product::after 
+  { content: attr(data-desc);  display: block; color: #000000; /* negro  font-size: 14px;
+  margin-top: 5px;}*/
+
+    /* NAVBAR */
+ .navbar {
+background: linear-gradient(
+  90deg, 
+  #0a0f2c 0%,    /* azul muy oscuro casi negro   */
+  #0a0f2c 40%,   /* azul oscuro */
+  #0a0f2c 70%,   /* azul grisáceo */
+  #0a0f2c 100%   /* azul oscuro más claro */
+);
+
+  padding: 10px 20px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: silver; /* platería */
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 10px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  text-decoration: none;
+  color: silver;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.nav-btn:hover {
+  color: #d4af37; /* dorado */
+}
+
+
+/* 📱 Responsive: en celulares */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column; /* apilar contenido */
+    align-items: center;
+  }
+
+  .nav-links {
+    margin-top: 10px;
+    flex-direction: column; /* botones uno debajo del otro */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand {
+    margin-bottom: 10px;
+  }
+}
+
+    /* CARRUSEL */
+    .hero.fullwidth {
+  max-width: 100% !important;
+  margin: 26px 0 0 0 !important;
+  padding: 0; /* opcional, elimina padding lateral si quieres */
+}
+.slide{
+  min-width:100%; 
+  height:80vh; /* ocupa 80% del alto de la pantalla */
+  max-height:700px; /* limita en pantallas muy grandes */
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+
+    .carousel{
+      position:relative; overflow:hidden; border-radius:var(--radius);
+      background:linear-gradient(180deg,#141414,#0f0f0f);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.06);
+    }
+    .carousel-track{
+      display:flex; transition: transform .45s ease-in-out;
+    }
+    
+  
+    /* Overlay inicia invisible y bajito */
+.overlay span {
+  opacity: 0;
+  transform: translateY(20px);
+  display: inline-block;
+  transition: all 0.5s ease;
+}
+
+.overlay span.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+    .ctrl{
+      position:absolute; inset:0; pointer-events:none;
+    }
+    .ctrl button{
+      pointer-events:auto; position:absolute; top:50%; transform:translateY(-50%);
+      border:none; width:42px; height:42px; border-radius:50%;
+      display:grid; place-items:center; cursor:pointer;
+      background:rgba(0,0,0,.5); color:#fff; font-size:18px;
+      box-shadow:0 6px 16px rgba(0,0,0,.4);
+    }
+    .ctrl .prev{ left:12px }
+    .ctrl .next{ right:12px }
+    .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; gap:8px; justify-content:center }
+    .dot{ width:8px; height:8px; border-radius:999px; background:rgba(255,255,255,.35); border:1px solid rgba(255,255,255,.3) }
+    .dot.active{ background:var(--gold); border-color:var(--gold-2) }
+
+    /* SECCIONES / CATEGORÍAS */
+    .section{
+      max-width:1200px; margin:34px auto 0; padding:0 18px;
+    }
+  .section-header {
+  display: flex;
+  flex-direction: column;   /* uno debajo del otro */
+  align-items: center;      /* centra en horizontal */
+  justify-content: center;  /* centra en vertical */
+  text-align: center;       /* centra el texto */
+  gap: 6px;                 /* pequeña separación entre título y subtítulo */
+  margin-bottom: 20px;      /* espacio con la grilla de productos */
+}
+
+.section-title, 
+.section-sub {
+  text-align: center;
+  width: 100%;
+}
+.slide img{
+  width:100%;
+  height:100%;
+  object-fit:cover; /* mantiene proporción y llena el contenedor */
+}
+
+
+    .section-sub{ color:var(--muted); font-size:14px }
+    .product-row{
+      background:var(--surface); border:1px solid rgba(225, 54, 54, 0.06);
+      border-radius:var(--radius); padding:16px; box-shadow: var(--shadow);
+    }
+    .grid{
+      display:grid; gap:var(--gap);
+      grid-template-columns:repeat(5, minmax(0,1fr));
+    }
+    .product{
+      background:var(--surface-2); border:1px solid rgba(101, 176, 223, 0.08);
+      border-radius:16px; padding:12px; text-align:center;
+      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
+      cursor:pointer;
+    }
+    .product:hover{ transform: translateY(-4px); border-color:var(--ring); box-shadow:0 0 0 6px var(--ring) }
+    .product img{
+      width:100%; aspect-ratio: 1 / 1; object-fit:cover; border-radius:12px;
+      box-shadow: inset 0 0 0 1px rgba(239, 6, 6, 0.06);
+    }
+    .p-name{ margin:10px 0 4px; font-weight:600 }
+    .p-price{ color:var(--gold); font-weight:600 }
+
+    /* MODAL (Vista rápida) */
+    .modal{
+      position:fixed; inset:0; background:rgba(0,0,0,.6);
+      display:none; align-items:center; justify-content:center; padding:18px; z-index:60;
+    }
+    .modal.open{ display:flex }
+    .modal-card{
+      width:min(980px, 100%); background:linear-gradient(180deg,#00BFFF,#00BFFF);/* MODAL  de vsiat de los productos(Vista rápida) */
+      border:1px solid rgba(255,255,255,.08); border-radius:18px; overflow:hidden;
+      box-shadow:0 30px 70px rgba(0,0,0,.6);
+      display:grid; grid-template-columns: 1.2fr 1fr;
+    }
+    .modal-media{
+      background:#000; display:flex; align-items:center; justify-content:center;
+      border-right:1px solid rgba(255,255,255,.06);
+    }
+    .modal-media img{
+      width:100%; height:100%; object-fit:contain; max-height:72vh;
+    }
+    .modal-info{ padding:22px }
+    .modal-title{ font-family:"Playfair Display",serif; font-size:26px; margin:0 0 10px }
+    .modal-price{ color:var(--gold); font-size:20px; font-weight:700; margin-bottom:10px }
+    .modal-desc{ color: #000000; /* negro */; line-height:1.6; margin-bottom:18px }
+    .modal-actions{ display:flex; gap:10px; flex-wrap:wrap }
+    .btn{
+      appearance:none; border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg,#1a1a1a,#111); color:var(--text);
+      padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600;
+      transition: transform .15s ease, border-color .15s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ border-color:var(--ring); box-shadow:0 0 0 6px var(--ring) }
+    .btn.gold{ background:linear-gradient(180deg, var(--gold), var(--gold-2)); color:#111; border-color:rgba(0,0,0,.3) }
+    .close-x{
+      position:absolute; right:20px; top:16px; width:36px; height:36px; border-radius:50%;
+      display:grid; place-items:center; font-size:20px; color:#fff; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.1);
+      cursor:pointer;
+    }
+    .close-x:hover{ background:rgba(0,0,0,.65) }
+
+    /* CONTACTO */
+    .contact{
+      max-width:1200px; margin:40px auto 60px; padding:0 18px;
+      display:grid; gap:var(--gap); grid-template-columns:1.2fr 1fr;
+    }
+    .card{
+      background:var(--surface); border:1px solid rgba(255,255,255,.06);
+      border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+    }
+    .card h3{ font-family:"Playfair Display",serif; margin:0 0 10px }
+    .muted{ color:var(--muted) }
+
+    /* FOOTER */
+    footer{
+      border-top:1px solid rgba(255,255,255,.08);
+      padding:18px; text-align:center; color:var(--muted);
+      background:#0e0e0e;
+    }
+
+    /* RESPONSIVE */
+  /* ---------- Mostrar y centrar los botones en móviles ---------- */
+/* Reemplaza/añade esta sección en tu CSS (sustituye la regla @media anterior) */
+@media (max-width: 860px){
+  /* Nav: logo arriba, botones debajo y centrados */
+  .nav-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 8px;
+  }
+
+  /* Mostrar los links en columna y centrarlos */
+  .nav-links {
+    display: flex !important;        /* fuerza visible si había display:none */
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+    padding: 0;
+  }
+
+  /* Botones del nav en bloque para que se toquen mejor en móvil */
+  .nav-btn {
+    width: auto;
+    padding: 10px 18px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  /* Mantener el nombre de marca centrado */
+  .brand, .brand-name {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* Ajustes de layout móvil para secciones y modal */
+  .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .modal-card { grid-template-columns: 1fr; }
+  .modal-media img { max-height:46vh; }
+
+  /* Asegura que los encabezados de sección queden centrados en móvil */
+  .section-header { 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-align: center;
+  }
+}
+
+/* ---------- Centrar textos de producto (si aún no lo tienes) ---------- */
+.product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;    /* centra horizontalmente la foto y texto */
+  justify-content: flex-start;
+  text-align: center;     /* centra nombres y precios */
+}
+
+/* Asegurar que nombre y precio se muestren centrados */
+.p-name, .p-price {
+  width: 100%;
+  text-align: center;
+}
+
+/* Centrar texto dentro del modal en móvil, mantener a la izquierda en escritorio */
+.modal-info { text-align: left; }
+@media (max-width: 860px){
+  .modal-info { text-align: center; }
+}
+
+/* (Opcional) Centrar overlay del carrusel */
+.slide .overlay { text-align: center; left: 50%; transform: translateX(-50%); width: auto; max-width: calc(100% - 40px); }
+
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+ <!-- NAVBAR --> 
+<!-- NAVBAR --> 
+<body class="bg-azul text-gray-900">
+  <!-- Navbar -->
+<header class="sticky top-0 z-40 bg-[#0a0f2c] border-b border-[#0a0f2c]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-6">
+      
+      <!-- Logo + enlaces -->
+      <div class="flex items-center gap-6 text-white">
+   <!-- Logo con imagen -->
+      
+   <!-- Logo con imagen -->
+      <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
+        <!-- Enlaces -->
+        <a href="colecciones.html" class="font-semibold text-lg hover:underline">
+          JOYERIA EN GENERAL
+        </a>
+        <a href="perforadores.html" class="font-semibold text-lg hover:underline">
+          PERFORADORES
+        </a>
+      </div>
+
+      <!-- Teléfono -->
+    
+
+      <!-- Botón menú móvil -->
+     <!-- Botón menú móvil -->
+      <button id="menuBtn" class="md:hidden p-2 border rounded text-white">☰</button>
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div id="mobileMenu" class="md:hidden hidden bg-[#0a0f2c] text-white pb-4 px-4">
+    <nav class="flex flex-col gap-3 text-lg">
+      <a href="https://web.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr#" target="_blank" class="hover:underline">
+        Facebook
+      </a>
+      <a href="#colecciones" class="hover:underline">
+        Joyería de Oro
+      </a>
+      <a href="#novedades" class="hover:underline">
+        Joyería de Plata
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Script para abrir/cerrar el menú móvil
+  document.getElementById("menuBtn").addEventListener("click", () => {
+    document.getElementById("mobileMenu").classList.toggle("hidden");
+  });
+  
+</script>
+    </div>
+  </div>
+</header>
+<style>@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+</style>
+
+<!-- HERO / CARRUSEL -->
+<!-- HERO / CARRUSEL -->
+<section id="inicio" class="hero relative w-full h-[600px] overflow-hidden">
+  <div class="carousel relative w-full h-full">
+    <div class="carousel-track flex transition-transform duration-700 ease-in-out h-full" id="track">
+
+      <!-- Slide 1 -->
+      <div class="slide w-full h-full relative">
+        <div class="shine-box w-full h-full">
+          <img src="img/luna.png" alt="Collar de oro">
+          <div class="particles"></div>
+        </div>
+        <div class="overlay">
+          <span>Colección</span>
+          <span>Lumière</span>
+          <span>—</span>
+          <span>Brillo</span>
+          <span>eterno</span>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide w-full h-full relative">
+        <div class="shine-box w-full h-full">
+          <img src="img/oro/4.jpg" alt="Anillos de oro rosa">
+          <div class="particles"></div>
+        </div>
+        <div class="overlay">
+          <span>Anillos</span>
+          <span>Apilables</span>
+          <span>—</span>
+          <span>Oro</span>
+          <span>Rosa</span>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide w-full h-full relative">
+        <div class="shine-box w-full h-full">
+          <img src="img/titanioo/15.jpg" alt="Pulseras de plata">
+          <div class="particles"></div>
+        </div>
+        <div class="overlay">
+          <span>Minimal</span>
+          <span>Pulseras</span>
+          <span>—</span>
+          <span>Silver</span>
+          <span>Plata</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* ==== SLIDES ==== */
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+/* ==== IMAGEN ==== */
+.shine-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.shine-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: filter 0.5s ease-in-out;
+}
+.shine-box.glow img {
+  filter: brightness(1.3) sepia(0.4) hue-rotate(-20deg) saturate(2);
+}
+
+/* ==== PARTÍCULAS ==== */
+.particles {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+@keyframes fall {
+  0%   { transform: translateY(-10px) scale(1); opacity: 1; }
+  100% { transform: translateY(110%) scale(0.5); opacity: 0; }
+}
+@keyframes rise {
+  0%   { transform: translateY(110%) scale(0.5); opacity: 0; }
+  50%  { opacity: 1; }
+  100% { transform: translateY(-20%) scale(1.2); opacity: 0; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50%      { opacity: 1; transform: scale(1.2); }
+}
+
+/* ==== TEXTO ==== */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  text-align: center;
+
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 3;
+}
+.overlay span {
+  opacity: 0;
+  transform: translateY(20px);
+  display: inline-block;
+  transition: all 0.5s ease;
+}
+.overlay span.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("track");
+  const slides = document.querySelectorAll(".slide");
+  let index = 0;
+
+  function createParticles(container) {
+    const particlesContainer = container.querySelector(".particles");
+    if (!particlesContainer) return;
+
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+
+      // color aleatorio (oro o blanco)
+      const colors = ["gold", "white"];
+      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+      // tamaño aleatorio
+      const size = Math.random() * 6 + 3;
+      particle.style.width = size + "px";
+      particle.style.height = size + "px";
+
+      // posición aleatoria
+      particle.style.left = Math.random() * 100 + "%";
+      particle.style.top = Math.random() * 100 + "%";
+
+      // animación aleatoria
+      const types = ["fall", "rise", "twinkle"];
+      const type = types[Math.floor(Math.random() * types.length)];
+      particle.style.animation = `${type} ${2 + Math.random() * 3}s linear forwards`;
+
+      particlesContainer.appendChild(particle);
+      setTimeout(() => particle.remove(), 5000);
+    }
+  }
+
+  function showSlide(i) {
+    // mover carrusel
+    track.style.transform = `translateX(-${i * 100}%)`;
+
+    // resetear textos
+    slides.forEach(slide => {
+      slide.querySelectorAll(".overlay span").forEach(span => span.classList.remove("active"));
+    });
+
+    // activar textos del slide actual
+    slides[i].querySelectorAll(".overlay span").forEach((span, idx) => {
+      span.style.transitionDelay = `${idx * 0.2}s`;
+      span.classList.add("active");
+    });
+
+    // efecto brillo y partículas
+    const shineBox = slides[i].querySelector(".shine-box");
+    shineBox.classList.add("glow");
+    createParticles(shineBox);
+
+    setTimeout(() => shineBox.classList.remove("glow"), 2000);
+  }
+
+  // mostrar el primero
+  showSlide(index);
+
+  // cambiar cada 5s
+  setInterval(() => {
+    index = (index + 1) % slides.length;
+    showSlide(index);
+  }, 5000);
+});
+</script>
+
+
+  <!-- SECCIONES / CATEGORÍAS -->
+  <!-- SECCIONES / CATEGORÍAS -->
+<!-- SECCIONES / CATEGORÍAS -->
+<section id="colecciones" class="bg-[#0a0f2c] py-20 w-full">
+  <!-- Contenedor centrado pero dentro de la franja -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    
+    <!-- Título y subtítulo -->
+    <div class="section-header mb-12">
+      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE ORO</h2>
+      <span class="section-sub text-xl opacity-90 block mt-2">
+        Descubre piezas únicas para cada ocasión
+      </span>
+    </div>
+
+    <div class="product-row">
+      <div class="grid">
+        <!-- 5 productos (ejemplo) -->
+        <article class="product" data-name="Anillo Aura" data-price="S/ 420" 
+        data-desc="Oro 18k con circonia de corte brillante." data-img="img/oro/1.jpg">
+          <img src="img/oro/1.jpg" alt="Anillo Aura en oro 18k">
+          <div class="p-name">Anillo Aura</div>
+          <div class="p-price">S/ 420</div>
+        </article>
+        <article class="product" data-name="Anillo Solstice" data-price="S/ 590"
+         data-desc="Oro rosa 18k con detalle minimal." data-img="img/oro/2.jpg">
+          <img src="img/oro/2.jpg" alt="Anillo Solstice en oro rosa">
+          <div class="p-name">Solstice</div>
+          <div class="p-price">S/ 590</div>
+        </article>
+        <article class="product" data-name="Anillo Eterna" data-price="S/ 680" 
+        data-desc="Aro fino con incrustaciones sutiles." data-img="img/oro/3.jpg">
+          <img src="img/oro/3.jpg" alt="Anillo Eterna con incrustaciones">
+          <div class="p-name">Eterna</div>
+          <div class="p-price">S/ 680</div>
+        </article>
+        <article class="product" data-name="Anillo Nova" data-price="S/ 520" 
+        data-desc="Diseño geométrico en oro amarillo." 
+        data-img="img/oro/4.jpg">
+          <img src="img/oro/4.jpg" alt="Anillo Nova geométrico">
+          <div class="p-name">Nova</div>
+          <div class="p-price">S/ 520</div>
+        </article>
+        <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/5.jpg">
+          <img src="img/oro/5.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/6.jpg">
+          <img src="img/oro/6.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/7.jpg">
+          <img src="img/oro/7.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/8.jpg">
+          <img src="img/oro/8.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/9.jpg">
+          <img src="img/oro/9.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+          <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
+        data-img="img/oro/10.jpg">
+          <img src="img/oro/10.jpg" alt="Anillo Brio acabado pulido">
+          <div class="p-name">Brio</div>
+          <div class="p-price">S/ 390</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+ <!-- Font Awesome 6 -->
+  <link 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+    rel="stylesheet" 
+  />
+</head>
+<body class="bg-gray-100">
+
+  <!-- Sección de calidad -->
+  <section class="bg-white py-20 text-center">
+    <h2 class="text-3xl font-bold mb-12 text-[#0a0f2c]">
+      Nuestra Calidad
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
+      
+      <!-- Icono 1 -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center">
+          <i class="fas fa-gem text-yellow-400 text-3xl"></i>
+        </div>
+        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Piezas únicas</h3>
+        <p class="text-gray-600 text-sm mt-2"></p>
+      </div>
+
+      <!-- Icono 2 -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 rounded-full bg-green-600 flex items-center justify-center">
+          <i class="fas fa-shield-alt text-yellow-400 text-3xl"></i>
+        </div>
+        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Limpieza</h3>
+        <p class="text-gray-600 text-sm mt-2"></p>
+      </div>
+
+      <!-- Icono 3 -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center">
+          <i class="fas fa-user-friends text-yellow-400 text-3xl"></i>
+        </div>
+        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Confianza</h3>
+        <p class="text-gray-600 text-sm mt-2"></p>
+      </div>
+
+      <!-- Icono 4 -->
+      <div class="flex flex-col items-center">
+        <div class="w-20 h-20 rounded-full bg-purple-600 flex items-center justify-center">
+          <i class="fas fa-star text-yellow-400 text-3xl"></i>
+        </div>
+        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Calificación</h3>
+        <p class="text-gray-600 text-sm mt-2"></p>
+      </div>
+
+    </div>
+  </section>
+
+  
+
+    
+    <!-- Título y subtítulo -->
+  
+
+
+  <section id="novedades" class="bg-[#0a0f2c] py-20 w-full">
+     <!-- Contenedor centrado pero dentro de la franja -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+    
+    <!-- Título y subtítulo -->
+    <div class="section-header mb-12">
+      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE PLATA</h2>
+      <span class="section-sub text-xl opacity-90 block mt-2">
+        Descubre piezas únicas para cada ocasión
+      </span>
+    </div>
+    <div class="product-row">
+      <div class="grid">
+        <article class="product" data-name="Navel Titanio" data-price="S/ 180" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/1.jpg">
+          <img src="img/titanioo/1.jpg" alt=" con piedras de opalo y zircon">
+          <div class="p-name">Navel Titanio transparente AB CZ  con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 180</div>
+        </article>
+        <article class="product" data-name="Navel piercing" data-price="S/ 200" data-desc="con doble gema trasnparente" 
+        data-img="img/titanioo/2.jpg">
+          <img src="img/titanioo/2.jpg" alt="con doble gema trasnparente">
+          <div class="p-name">Navel piercing con doble gema trasnparente</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+        <article class="product" data-name="Piercing de titanio" data-price="S/ 200" data-desc="Cpara ombligo doble opalo blanco"
+         data-img="img/titanioo/3.jpg">
+          <img src="img/titanioo/3.jpg" alt="para ombligo doble opalo blanco">
+          <div class="p-name">Piercing de titanio para ombligo doble opalo blanco</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+        <article class="product" data-name="Piercing para ombligo anonizado " data-price="S/ 180" data-desc="con opalo sintetico" 
+        data-img="img/titanioo/4.jpg">
+          <img src="img/titanioo/4.jpg" alt="con opalo sintetico">
+          <div class="p-name">Piercing para ombligo anonizado con opalo sintetico</div>
+          <div class="p-price">S/ 180</div>
+        </article>
+        <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/5.jpg">
+          <img src="img/titanioo/5.jpg" alt="con piedras de opalo y zircon">
+          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+         <article class="product" data-name="Piercing para ombligo anonizado " data-price="S/ 180" data-desc="con opalo sintetico" 
+        data-img="img/titanioo/6.jpg">
+          <img src="img/titanioo/6.jpg" alt="con opalo sintetico">
+          <div class="p-name">Piercing para ombligo anonizado con opalo sintetico</div>
+          <div class="p-price">S/ 180</div>
+        </article>
+        <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/7.jpg">
+          <img src="img/titanioo/7.jpg" alt="con piedras de opalo y zircon">
+          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/8.jpg">
+          <img src="img/titanioo/8.jpg" alt="con piedras de opalo y zircon">
+          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/9.jpg">
+          <img src="img/titanioo/9.jpg" alt="con piedras de opalo y zircon">
+          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        data-img="img/titanioo/10.jpg">
+          <img src="img/titanioo/10.jpg" alt="con piedras de opalo y zircon">
+          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
+          <div class="p-price">S/ 200</div>
+        </article>
+        
+      </div>
+    </div>
+  </section>
+<script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Sección Encargado -->
+  <section class="bg-white py-16">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12 px-6">
+
+      <!-- Foto encargada -->
+      <div class="flex justify-center">
+        <img id="fotoEncargada" src="encargada1.jpg" alt="Encargada" 
+             class="w-80 h-80 object-cover rounded-2xl shadow-lg transition duration-700 ease-in-out">
+      </div>
+
+      <!-- Info + Contadores -->
+      <div class="space-y-8">
+        <h2 class="text-3xl font-bold text-[#0a0f2c]">Conoce a Nuestra Encargada</h2>
+        <p class="text-gray-600">
+          Ella lidera el equipo de <b>Coyotes Tattoo & Piercings</b>, garantizando calidad,
+          confianza y un servicio personalizado para cada cliente.
+        </p>
+
+        <!-- Contadores -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+
+          <!-- Clientes -->
+          <div class="bg-blue-600 p-6 rounded-xl shadow text-white">
+            <i class="fas fa-users text-yellow-400 text-3xl mb-2"></i>
+            <h3 class="text-3xl font-bold counter" data-target="1200">0</h3>
+            <p class="text-sm mt-1">Clientes satisfechos</p>
+          </div>
+
+          <!-- Ventas -->
+          <div class="bg-green-600 p-6 rounded-xl shadow text-white">
+            <i class="fas fa-shopping-cart text-yellow-400 text-3xl mb-2"></i>
+            <h3 class="text-3xl font-bold counter" data-target="3500">0</h3>
+            <p class="text-sm mt-1">Ventas realizadas</p>
+          </div>
+
+          <!-- Experiencia -->
+          <div class="bg-purple-600 p-6 rounded-xl shadow text-white">
+            <i class="fas fa-briefcase text-yellow-400 text-3xl mb-2"></i>
+            <h3 class="text-3xl font-bold counter" data-target="7">0</h3>
+            <p class="text-sm mt-1">Años de experiencia</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Script -->
+  <script>
+    // Contadores
+    function iniciarContadores() {
+      const counters = document.querySelectorAll('.counter');
+      counters.forEach(counter => {
+        counter.innerText = '0';
+        const target = +counter.getAttribute('data-target');
+        
+        const updateCounter = () => {
+          const c = +counter.innerText;
+          const increment = target / 200;
+
+          if (c < target) {
+            counter.innerText = Math.ceil(c + increment);
+            setTimeout(updateCounter, 20);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        updateCounter();
+      });
+    }
+
+    iniciarContadores();
+    setInterval(iniciarContadores, 7000);
+
+    // Cambio de foto
+    const fotos = ["45.png", "14.png"]; // <-- tus dos fotos
+    let indexFoto = 0;
+    const img = document.getElementById("fotoEncargada");
+
+    setInterval(() => {
+      indexFoto = (indexFoto + 1) % fotos.length;
+      img.src = fotos[indexFoto];
+    }, 5000); // cambia cada 5 segundos
+  </script>
+  <!-- Footer -->
+<footer style="background:#111; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
+    
+    <!-- Redes Sociales -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Redes Sociales</h3>
+      <a href="https://www.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/coyotestattooperu/" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
+        Instagram
+      </a>
+    </div>
+
+    <!-- Mapa -->
+   <!-- Ubicación -->
+<!-- Ubicación Coyotes Tattoo -->
+<div style="flex:2; min-width:200px; text-align:center; margin:10px;">
+  <h3 style="margin-bottom:10px; font-size:16px;">Ubicación</h3>
+  <iframe 
+    src="https://www.google.com/maps?q=C.+Bajada+Balta+127,+Miraflores+15074&output=embed"
+    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+  <p style="margin-top:5px;">C. Bajada Balta 127, Miraflores 15074</p>
+</div>
+
+    <!-- Contacto -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Contacto</h3>
+      <p style="margin:2px 0;">Tel: +51 987 654 321</p>
+      <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>
+      <p style="margin:2px 0;">Dirección: Bajada Balta 127 y 135, Lima</p>
+    </div>
+
+  </div>
+
+  
+</footer>
+
+<!-- CSS para efecto de oscilación -->
+<style>
+  footer a:hover {
+    transform: rotate(-5deg) scale(1.1);
+  }
+</style>
+  <!-- MODAL -->
+  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Vista rápida del producto">
+    <div class="modal-card" role="document">
+      <button class="close-x" aria-label="Cerrar" onclick="closeModal()">✕</button>
+      <div class="modal-media">
+        <img id="m-img" src="" alt="">
+      </div>
+      <div class="modal-info">
+        <h3 class="modal-title" id="m-title">Título</h3>
+        <div class="modal-price" id="m-price">S/ 0</div>
+        <p class="modal-desc" id="m-desc">Descripción breve del producto.</p>
+        <div class="modal-actions">
+        
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ====== CARRUSEL SIMPLE ====== */
+    const track = document.getElementById('track');
+    const slides = Array.from(track.children);
+    let index = 0;
+
+    function updateDots(){
+      const dots = document.getElementById('dots');
+      dots.innerHTML = '';
+      slides.forEach((_, i) => {
+        const d = document.createElement('span');
+        d.className = 'dot' + (i === index ? ' active' : '');
+        dots.appendChild(d);
+      });
+    }
+    function goTo(i){
+      index = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      updateDots();
+    }
+    function moveSlide(step){ goTo(index + step); }
+    updateDots();
+    // Auto-play (opcional)
+    let autoplay = setInterval(()=>moveSlide(1), 6000);
+    document.querySelector('.carousel').addEventListener('mouseenter',()=>clearInterval(autoplay));
+    document.querySelector('.carousel').addEventListener('mouseleave',()=>autoplay = setInterval(()=>moveSlide(1), 6000));
+
+    /* ====== MODAL: VISTA RÁPIDA ====== */
+    const modal = document.getElementById('modal');
+    const mImg = document.getElementById('m-img');
+    const mTitle = document.getElementById('m-title');
+    const mPrice = document.getElementById('m-price');
+    const mDesc = document.getElementById('m-desc');
+
+    function openModal({img, title, price, desc, alt}){
+      mImg.src = img;
+      mImg.alt = alt || title || 'Producto';
+      mTitle.textContent = title || '';
+      mPrice.textContent = price || '';
+      mDesc.textContent = desc || '';
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden','false');
+      document.body.style.overflow='hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('open');
+      modal.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+      // Limpieza para evitar que imagenes enormes permanezcan en memoria en móviles
+      setTimeout(()=>{ mImg.src=''; }, 300);
+    }
+    modal.addEventListener('click',(e)=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown',(e)=>{ if(e.key === 'Escape') closeModal(); });
+
+    // Delegación de eventos: todas las .product abren modal
+    document.addEventListener('click',(e)=>{
+      const card = e.target.closest('.product');
+      if(!card) return;
+      openModal({
+        img: card.dataset.img,
+        title: card.dataset.name,
+        price: card.dataset.price,
+        desc: card.dataset.desc,
+        alt: card.querySelector('img')?.alt
+      });
+    });
+  </script>
+  <script>// Array carrito
+
+</script>
+</body>
+</html>

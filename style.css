@@ -1,0 +1,254 @@
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #fdfaf7;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+/* Header dorado elegante */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(90deg, #0a0f2c, #0a0f2c);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+}
+
+header button {
+  background: #fff;
+  color: #0a0f2c;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+
+header button:hover {
+  background: #f2f2f2;
+  transform: translateY(-2px);
+}
+
+/* Categorías con estilo elegante */
+nav.categorias {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+nav.categorias .btn-cat {
+  background: linear-gradient(145deg, #0a0f2c, #0a0f2c);
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+nav.categorias .btn-cat:hover {
+  background: linear-gradient(145deg, #0a0f2c #0a0f2c);
+  transform: translateY(-2px);
+}
+
+/* Tarjetas de productos con efecto metálico */
+
+.productos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centra las tarjetas */
+  gap: 25px;
+}
+
+.producto {
+  background: linear-gradient(145deg, #0a0f2c, #0a0f2c);
+  border-radius: 15px;
+  padding: 15px;
+  width: 30%; /* 3 por fila en desktop */
+  min-width: 200px;
+  text-align: center;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+/* Pantallas medianas / tablet */
+@media (max-width: 1024px) {
+  .producto {
+    width: 45%; /* 2 por fila */
+  }
+}
+
+/* Móviles pequeños */
+@media (max-width: 600px) {
+  .producto {
+    width: 45%; /* 2 por fila también */
+  }
+}
+
+.producto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+
+.producto img {
+  width: 100%;
+  height: 200px;     /* altura fija */
+  object-fit: cover; /* mantiene proporción y recorta si es necesario */
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.producto img:hover {
+  transform: scale(1.05);
+}
+
+.producto h3 {
+  margin: 10px 0 5px;
+  font-weight: 600;
+  color: #f0eae2; /* dorado suave */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.producto p {
+  margin: 5px 0;
+  font-weight: bold;
+  color: #555;
+}
+
+.producto button {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(145deg, #d4af37, #f5e1a4);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.producto button:hover {
+  background: linear-gradient(145deg, #2fc95b, #d4af37);
+  transform: translateY(-2px);
+}
+
+/* Modal lujo */
+.modal {
+  display: none;
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #fff, #f5f0e6);
+  padding: 25px;
+  border-radius: 20px;
+  max-width: 450px;
+  width: 90%;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* Cerrar modales */
+.cerrar, .cerrar-carrito, .cerrar-form {
+  position: absolute;
+  top:15px;
+  right:20px;
+  font-weight: bold;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Contador de cantidad */
+.cantidad-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.cantidad-box input {
+  width: 60px;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+/* Carrito items */
+#carrito-items .item-carrito {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+#carrito-items .item-carrito img {
+  width: 60px;
+  border-radius: 12px;
+}
+
+#carrito-items .item-carrito input {
+  width: 50px;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-weight: bold;
+}
+
+#carrito-items .item-carrito button {
+  background: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 5px 8px;
+  transition: 0.3s;
+}
+
+#carrito-items .item-carrito button:hover {
+  background: #e74c3c;
+}
+section h2 {
+  text-align: center;
+  color: #6b4c23;
+  margin-bottom: 20px;
+}
+/* Imagen del modal */
+#modal-detalle img {
+  width: 100%;       /* ocupa todo el ancho del modal */
+  max-height: 300px; /* altura fija para uniformidad */
+  object-fit: cover; /* recorta la imagen si es necesario */
+  border-radius: 15px;
+  margin-bottom: 15px;
+}

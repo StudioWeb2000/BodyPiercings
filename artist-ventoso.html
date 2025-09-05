@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ventoso - Tiger Tattoos</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .star { font-size: 1.5rem; cursor: pointer; color: gray; }
+    .star.selected { color: gold; }
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+      flex-direction: column;
+    }
+    .lightbox img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+    }
+    .lightbox .controls {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      transform: translateY(-50%);
+      color: white;
+      font-size: 2.5rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+  
+  <!-- Navbar -->
+<header class="sticky top-0 z-40 border-b" style="background-color:#0a0f2c; border-color:#0a0f2c;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
+        <div class="font-semibold text-white">coyotes tatoo</div>
+      </a>
+      <a href="index.html" class="px-4 py-2 border rounded-lg text-white hover:bg-white hover:text-black transition">
+        ← Volver
+      </a>
+    </div>
+  </div>
+</header>
+
+  <!-- Perfil del artista -->
+  <section class="max-w-5xl mx-auto px-6 py-16 relative">
+  <div class="text-center">
+    <!-- Imagen del artista -->
+    <img src="img/p1.png" alt="Ventoso" 
+      class="w-56 h-56 rounded-full mx-auto shadow-lg object-cover border-4 border-white relative z-10 -mt-10">
+    
+    <!-- Nombre -->
+    <h1 class="mt-6 text-4xl font-extrabold">Ventoso</h1>
+    <p class="text-gray-600 mt-2">Artista del tatuaje especializado en estilos:</p>
+
+    <!-- Estilos -->
+    <div class="flex flex-wrap justify-center gap-2 mt-3">
+      <span class="px-3 py-1 bg-gray-800 text-white rounded-full text-sm">Línea fina</span>
+    </div>
+
+    <!-- Botón -->
+    <a href="index.html#book" 
+       class="inline-block mt-6 px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400 text-white font-semibold rounded-lg shadow hover:scale-105 transform transition">
+      Reserva tu sesión
+    </a>
+  </div>
+</section>
+
+
+  <!-- Galería -->
+  <!-- Galería -->
+<section class="max-w-6xl mx-auto px-6 py-12">
+  <h2 class="text-2xl font-bold mb-6 text-center">Galería de Ventoso</h2>
+  <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+    <img src="img/p4.png" onclick="openLightbox(0)" class="rounded-lg shadow hover:scale-105 transform transition object-cover h-64 w-full cursor-pointer">
+    <img src="img/pc3.png" onclick="openLightbox(1)" class="rounded-lg shadow hover:scale-105 transform transition object-cover h-64 w-full cursor-pointer">
+    <img src="img/p3.png" onclick="openLightbox(2)" class="rounded-lg shadow hover:scale-105 transform transition object-cover h-64 w-full cursor-pointer">
+    <img src="img/pc4.png" onclick="openLightbox(3)" class="rounded-lg shadow hover:scale-105 transform transition object-cover h-64 w-full cursor-pointer">
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="fixed inset-0 bg-black bg-opacity-90 hidden flex items-center justify-center z-50">
+  <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+  
+  <button onclick="prevImage()" class="absolute left-4 text-white text-4xl">&#10094;</button>
+  <img id="lightbox-img" src="" class="max-h-[80vh] max-w-[80vw] rounded-lg shadow-lg">
+  <button onclick="nextImage()" class="absolute right-4 text-white text-4xl">&#10095;</button>
+</div>
+
+<script>
+  const galleryImages = [
+    "img/p4.png",
+    "img/pc3.png",
+    "img/p3.png",
+    "img/pc4.png"
+  ];
+  let currentIndex = 0;
+
+  function openLightbox(index) {
+    currentIndex = index;
+    document.getElementById("lightbox").classList.remove("hidden");
+    document.getElementById("lightbox-img").src = galleryImages[currentIndex];
+  }
+
+  function closeLightbox() {
+    document.getElementById("lightbox").classList.add("hidden");
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % galleryImages.length;
+    document.getElementById("lightbox-img").src = galleryImages[currentIndex];
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+    document.getElementById("lightbox-img").src = galleryImages[currentIndex];
+  }
+</script>
+
+
+ <!-- Franja con cuadro de iconos -->
+<section class="bg-gray-900 py-16">
+  <div class="flex justify-center">
+    <div class="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white rounded-2xl shadow-lg p-10 w-96">
+      <div class="grid grid-cols-2 gap-8 text-center">
+
+        <!-- Citas Puntuales -->
+        <div>
+          <svg class="mx-auto h-12 w-12 text-yellow-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <p class="mt-3 font-semibold">Citas Puntuales</p>
+        </div>
+
+        <!-- Agujas Nuevas -->
+        <div>
+          <svg class="mx-auto h-12 w-12 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M12 4v16m8-8H4"/>
+          </svg>
+          <p class="mt-3 font-semibold">Agujas Nuevas</p>
+        </div>
+
+        <!-- Higiene Garantizada -->
+        <div>
+          <svg class="mx-auto h-12 w-12 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path d="M3 7h18M3 12h18M3 17h18"/>
+          </svg>
+          <p class="mt-3 font-semibold">Higiene Garantizada</p>
+        </div>
+
+        <!-- Esterilización -->
+        <div>
+          <svg class="mx-auto h-12 w-12 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+          </svg>
+          <p class="mt-3 font-semibold">Esterilización</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Reseñas -->
+<section class="max-w-5xl mx-auto px-6 py-12 bg-white rounded-xl shadow-lg">
+  <h2 class="text-2xl font-bold mb-6">Deja tu reseña</h2>
+  
+  <div id="rating" class="flex gap-2 text-yellow-400 mb-4 justify-center">
+    <span class="star" data-value="1">★</span>
+    <span class="star" data-value="2">★</span>
+    <span class="star" data-value="3">★</span>
+    <span class="star" data-value="4">★</span>
+    <span class="star" data-value="5">★</span>
+  </div>
+
+  <textarea id="commentInput" placeholder="Escribe tu comentario aquí..." class="w-full border rounded-lg p-3 mb-4"></textarea>
+  <button onclick="submitReview()" class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800">Enviar reseña</button>
+  
+  <h3 class="text-xl font-semibold mt-8 mb-4">Comentarios de clientes</h3>
+  <div id="reviewsList" class="space-y-4"></div>
+</section>
+
+<script>
+  let selectedRating = 0;
+  const stars = document.querySelectorAll('.star');
+  const reviewsList = document.getElementById('reviewsList');
+
+  // ⭐ Manejo de estrellas
+  stars.forEach(star => {
+    star.addEventListener('click', () => {
+      selectedRating = star.getAttribute('data-value');
+      stars.forEach(s => s.classList.remove('selected'));
+      for (let i = 0; i < selectedRating; i++) {
+        stars[i].classList.add('selected');
+      }
+    });
+  });
+
+  // 📌 Cargar reseñas desde localStorage
+  function loadReviews() {
+    const savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    reviewsList.innerHTML = "";
+    if (savedReviews.length === 0) {
+      reviewsList.innerHTML = `<p class="text-gray-500">Aún no hay reseñas. Sé el primero en dejar una ⭐</p>`;
+      return;
+    }
+
+    savedReviews.forEach(r => {
+      const reviewEl = document.createElement('div');
+      reviewEl.className = "p-4 bg-gray-100 rounded-lg";
+      reviewEl.innerHTML = `
+        <div class="flex items-center gap-2 mb-2">
+          ${'★'.repeat(r.rating)}${'☆'.repeat(5 - r.rating)}
+        </div>
+        <p>${r.comment}</p>
+      `;
+      reviewsList.prepend(reviewEl);
+    });
+  }
+
+  // 📌 Guardar nueva reseña
+  function submitReview(){
+    const comment = document.getElementById('commentInput').value.trim();
+    if(!selectedRating || !comment){
+      alert("Por favor selecciona una calificación y escribe un comentario.");
+      return;
+    }
+
+    const newReview = { rating: parseInt(selectedRating), comment: comment };
+
+    // Guardar en localStorage
+    let savedReviews = JSON.parse(localStorage.getItem("reviews")) || [];
+    savedReviews.push(newReview);
+    localStorage.setItem("reviews", JSON.stringify(savedReviews));
+
+    // Reset
+    document.getElementById('commentInput').value = "";
+    stars.forEach(s => s.classList.remove('selected'));
+    selectedRating = 0;
+
+    loadReviews();
+  }
+
+  // 📌 Insertar reseñas iniciales si no existen
+  function initDefaultReviews(){
+    let savedReviews = JSON.parse(localStorage.getItem("reviews"));
+    if (!savedReviews || savedReviews.length === 0) {
+      const defaultReviews = [
+        { rating: 5, comment: "Excelente trabajo, muy profesional 👌" },
+        { rating: 4, comment: "Muy buen diseño, aunque tardó un poco más de lo esperado." },
+        { rating: 5, comment: "Quedé encantado con mi tatuaje, lo recomiendo totalmente 🙌" },
+        { rating: 3, comment: "El tatuaje quedó bien, pero el local estaba un poco lleno." }
+      ];
+      localStorage.setItem("reviews", JSON.stringify(defaultReviews));
+    }
+  }
+
+  // Inicializar
+  initDefaultReviews();
+  loadReviews();
+</script>
+
+  <!-- Footer -->
+<footer style="background:#0a0f2c; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
+    
+    <!-- Redes Sociales -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Redes Sociales</h3>
+      <a href="https://www.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/coyotestattooperu/" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
+        Instagram
+      </a>
+    </div>
+
+    <!-- Mapa -->
+   <!-- Ubicación -->
+<!-- Ubicación Coyotes Tattoo -->
+<div style="flex:2; min-width:200px; text-align:center; margin:10px;">
+  <h3 style="margin-bottom:10px; font-size:16px;">Ubicación</h3>
+  <iframe 
+    src="https://www.google.com/maps?q=C.+Bajada+Balta+127,+Miraflores+15074&output=embed"
+    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+  <p style="margin-top:5px;">C. Bajada Balta 127, Miraflores 15074</p>
+</div>
+
+    <!-- Contacto -->
+    <div style="flex:1; min-width:150px;">
+      <h3 style="margin-bottom:10px; font-size:16px;">Contacto</h3>
+      <p style="margin:2px 0;">Tel: +51 987 654 321</p>
+      <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>
+      <p style="margin:2px 0;">Dirección: Bajada Balta 127 y 135, Lima</p>
+    </div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:15px; font-size:12px;">&copy; 2025 Coyote Tattoo Perú</p>
+</footer>
+
+<!-- CSS para efecto de oscilación -->
+<style>
+  footer a:hover {
+    transform: rotate(-5deg) scale(1.1);
+  }
+</style>
+
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if (el) {
+          e.preventDefault();
+          el.scrollIntoView({behavior:'smooth'});
+          mobileMenu?.classList.add('hidden');
+        }
+      });
+    });
+
+    // Reviews slider
+    const track = document.getElementById('sliderTrack');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    let index = 0;
+    function updateSlider(){
+      track.style.transform = `translateX(${-index * 100}%)`;
+    }
+    nextBtn.addEventListener('click', () => { index = (index + 1) % 2; updateSlider(); });
+    prevBtn.addEventListener('click', () => { index = (index + 1) % 2; updateSlider(); });
+    // Auto-play
+    setInterval(() => { index = (index + 1) % 2; updateSlider(); }, 6000);
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
