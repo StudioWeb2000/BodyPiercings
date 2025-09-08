@@ -110,7 +110,7 @@
           <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#0a0f2c;">
             <img src="img/titanioo/16.jpg" class="w-full h-full rounded-full object-cover" alt="Kiara">
           </div>
-          <h3 class="mt-6 text-xl font-semibold">Kiara</h3>
+          <h3 class="mt-6 text-xl font-semibold">KIARA</h3>
           <p class="text-gray-600 text-sm">Artista del piercing</p>
         </div>
 
@@ -119,26 +119,49 @@
   </section>
 
   <!-- Modal detalle artista -->
-  <div id="artistModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50">
-    <div class="bg-gray-900 text-white max-w-5xl w-full rounded-2xl overflow-hidden p-8 relative shadow-2xl">
-      <button onclick="closeArtist()" class="absolute top-3 right-3 text-gray-400 hover:text-white text-2xl">✕</button>
-      <div class="grid md:grid-cols-2 gap-8 items-start">
-        <div>
-          <img id="artistPhoto" src="" class="w-full h-96 object-cover rounded-xl shadow-lg">
-        </div>
-        <div>
-          <h3 id="artistName" class="text-3xl font-bold"></h3>
-          <p id="artistDesc" class="text-gray-300 mt-3"></p>
-          <div id="artistGallery" class="grid grid-cols-2 gap-3 mt-6"></div>
-          <div id="artistRating" class="mt-6"></div>
-          <a id="artistLink" href="#" target="_blank" 
-          
-          class="inline-block mt-6 px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400 text-white rounded-lg shadow-md transition transform hover:scale-105">Ver más</a>
-        </div>
+<!-- Modal detalle artista -->
+<div id="artistModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-y-auto">
+  <div class="bg-gray-900 text-white w-full h-full sm:h-auto sm:max-w-5xl rounded-none sm:rounded-2xl overflow-y-auto p-6 relative shadow-2xl mx-0 sm:mx-2 my-0 sm:my-8">
+    
+    <!-- Botón de cerrar fijo -->
+    <button onclick="closeArtist()" 
+            class="fixed top-4 right-4 bg-black/70 text-white p-2 rounded-full text-3xl z-50">
+      ✕
+    </button>
+
+    <div class="grid sm:grid-cols-2 gap-6 items-start">
+      
+      <!-- Foto principal -->
+      <div>
+        <img id="artistPhoto" src="" class="w-full h-72 sm:h-96 object-cover rounded-xl shadow-lg">
+      </div>
+
+      <!-- Info artista -->
+      <div>
+        <h3 id="artistName" class="text-2xl sm:text-3xl font-bold"></h3>
+        <p id="artistDesc" class="text-gray-300 mt-3"></p>
+
+        <!-- Galería -->
+        <div id="artistGallery" class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6"></div>
+
+        <!-- Botón ver más -->
+        <a id="artistLink" href="#" target="_blank" 
+           class="inline-block mt-6 px-6 py-3 bg-gradient-to-r from-pink-500 via-purple-500 to-yellow-400 text-white rounded-lg shadow-md">
+          Ver más
+        </a>
       </div>
     </div>
   </div>
+</div>
 
+
+<script>// cerrar si se hace clic fuera del contenido
+document.getElementById("artistModal").addEventListener("click", function(e){
+  if(e.target.id === "artistModal"){
+    closeArtist();
+  }
+});
+</script>
   <!-- Lightbox -->
   <div id="lightbox">
     <button id="closeLightbox" class="lightbox-close">✕</button>
@@ -155,13 +178,13 @@
         name: "ANGELA",
         desc: "Artista del piercing con experiencia en estilos modernos y seguros.",
         photo: "img/oro/1.jpg",
-        gallery: ["p1.png","img/p2.png","img/p3.png","p4.png"],
+        gallery: ["img/p1.png","img/p2.png","img/p3.png","img/p4.png"], // corregido
         link: "artist-kiara.html"  
       },
       kiara: {
         name: "KIARA",
         desc: "Artista especializada en piercings y tatuajes minimalistas.",
-        photo: "bd.jpg",
+        photo: "img/bd.jpg",
         gallery: ["img/pc1.png","img/pc2.png","img/pc3.png","img/pc4.png"],
         link: "artist-ventoso.html"  
       }
@@ -179,7 +202,11 @@
       gal.innerHTML = "";
       currentGallery = art.gallery;
       art.gallery.forEach((img, i) => {
-        gal.innerHTML += `<img src="${img}" class="w-full h-28 object-cover rounded-lg shadow-md cursor-pointer" onclick="openLightbox(${i})">`;
+        gal.innerHTML += `
+          <img src="${img}" 
+               class="w-full h-32 sm:h-40 object-cover rounded-lg shadow-md cursor-pointer" 
+               onclick="openLightbox(${i})">
+        `;
       });
       document.getElementById("artistLink").href = art.link;
       document.getElementById("artistModal").classList.remove("hidden");
@@ -328,3 +355,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
