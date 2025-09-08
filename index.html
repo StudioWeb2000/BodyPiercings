@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +17,7 @@
    background: #ffffff;
 
       --surface:#0a0f2c;
-      --surface-2:#00BFFF;
+      --surface-2:#ffffff;
       --text:#0a0f2c;
       --muted:#ffffff;
       --gold:#0f0f10;
@@ -654,7 +657,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     <!-- Título y subtítulo -->
     <div class="section-header mb-12">
-      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE ORO</h2>
+      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE OROssss</h2>
       <span class="section-sub text-xl opacity-90 block mt-2">
         Descubre piezas únicas para cada ocasión
       </span>
@@ -727,6 +730,53 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
   </section>
+  <!-- Modal producto -->
+<div id="productModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-y-auto">
+  <div class="bg-white text-gray-900 w-full h-full sm:h-auto sm:max-w-lg rounded-none sm:rounded-2xl overflow-y-auto p-6 relative shadow-2xl mx-0 sm:mx-2 my-0 sm:my-8">
+    
+    <!-- Botón de cerrar -->
+    <button onclick="closeProduct()" 
+            class="fixed top-4 right-4 bg-black/70 text-white p-2 rounded-full text-3xl z-50">
+      ✕
+    </button>
+
+    <!-- Contenido del modal -->
+    <div class="text-center">
+      <img id="modalImg" src="" alt="" class="w-full h-64 object-cover rounded-xl shadow-md mb-4">
+      <h3 id="modalName" class="text-2xl font-bold mb-2"></h3>
+      <p id="modalPrice" class="text-xl font-semibold text-pink-600 mb-3"></p>
+      <p id="modalDesc" class="text-gray-600"></p>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // Abrir modal al dar clic en producto
+  document.querySelectorAll(".product").forEach(product => {
+    product.addEventListener("click", () => {
+      document.getElementById("modalName").textContent = product.dataset.name;
+      document.getElementById("modalPrice").textContent = product.dataset.price;
+      document.getElementById("modalDesc").textContent = product.dataset.desc;
+      document.getElementById("modalImg").src = product.dataset.img;
+
+      document.getElementById("productModal").classList.remove("hidden");
+    });
+  });
+
+  // Cerrar modal
+  function closeProduct(){
+    document.getElementById("productModal").classList.add("hidden");
+  }
+
+  // También cerrar si se toca el fondo oscuro
+  document.getElementById("productModal").addEventListener("click", function(e){
+    if(e.target.id === "productModal"){
+      closeProduct();
+    }
+  });
+</script>
+
 
 
  <!-- Font Awesome 6 -->
