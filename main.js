@@ -163,7 +163,7 @@ document.getElementById("formulario-pedido").onsubmit = (e) => {
   let total = carrito.reduce((acc, item) => acc + item.precio*item.cantidad,0);
   mensaje += `Total: S/ ${total.toFixed(2)}`;
 
-  window.open(`https://wa.me/51968406928?text=${mensaje}`, '_blank');
+  window.open(`https://wa.me/51902769003?text=${mensaje}`, '_blank');
   carrito = [];
   localStorage.removeItem("carrito");
   actualizarCarrito();
