@@ -361,63 +361,103 @@ background: linear-gradient(
 
   <!-- NAVBAR -->
  <!-- NAVBAR --> 
-<!-- NAVBAR --> 
+
+ <!-- NAVBAR -->
 <body class="bg-azul text-gray-900">
   <!-- Navbar -->
-<header class="sticky top-0 z-40 bg-[#0a0f2c] border-b border-[#0a0f2c]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex justify-between items-center py-6">
-      
-      <!-- Logo + enlaces -->
-      <div class="flex items-center gap-6 text-white">
-   <!-- Logo con imagen -->
-      
-   <!-- Logo con imagen -->
-      <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
-        <!-- Enlaces -->
-        <a href="colecciones.html" class="font-semibold text-lg hover:underline">
-          JOYERIA EN GENERAL
-        </a>
-        <a href="perforadores.html" class="font-semibold text-lg hover:underline">
-          PERFORADORES
-        </a>
+  <header class="sticky top-0 z-40 bg-[#0a0f2c] border-b border-[#0a0f2c]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-6">
+        
+        <!-- Logo -->
+        <div class="flex items-center gap-6 text-white">
+          <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
+        </div>
+
+        <!-- Bloque central: iconos -->
+        <div class="flex items-center gap-6 text-white">
+          <!-- Joyeria -->
+          <a href="colecciones.html" class="flex items-center gap-2 hover:underline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="#FFD700" viewBox="0 0 24 24" stroke="#FFD700" stroke-width="2">
+              <path d="M12 3l3.09 5.5L12 14l-3.09-5.5L12 3z" />
+              <path d="M2 9l10 12L22 9H2z" />
+            </svg>
+            <span class="hidden md:inline font-semibold text-lg">JOYERÍA EN GENERAL</span>
+          </a>
+
+          <!-- Perforadores -->
+          <a href="perforadores.html" class="flex items-center gap-2 hover:underline">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#40E0D0" stroke-width="2">
+              <circle cx="12" cy="12" r="9" stroke="#40E0D0" />
+              <circle cx="16" cy="12" r="2.5" fill="#40E0D0" />
+            </svg>
+            <span class="hidden md:inline font-semibold text-lg">PERFORADORES CORPORALES</span>
+          </a>
+        </div>
+
+        <!-- Botón menú móvil -->
+        <button id="menuBtn" class="md:hidden p-2 border rounded text-white">☰</button>
+
+        <!-- Buscador (solo visible en PC) -->
+        <div class="hidden md:block md:w-64">
+          <input type="text" id="searchInput" placeholder="Buscar productos..."
+            class="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black placeholder-gray-500">
+        </div>
       </div>
-
-      <!-- Teléfono -->
-    
-
-      <!-- Botón menú móvil -->
-     <!-- Botón menú móvil -->
-      <button id="menuBtn" class="md:hidden p-2 border rounded text-white">☰</button>
     </div>
-  </div>
 
-  <!-- Menú móvil -->
-  <div id="mobileMenu" class="md:hidden hidden bg-[#0a0f2c] text-white pb-4 px-4">
-    <nav class="flex flex-col gap-3 text-lg">
-      <a href="https://web.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr#" target="_blank" class="hover:underline">
-        Facebook
-      </a>
-      <a href="#colecciones" class="hover:underline">
-        Joyería de Oro
-      </a>
-      <a href="#novedades" class="hover:underline">
-        Joyería de Plata
-      </a>
-    </nav>
-  </div>
-</header>
-
-<script>
-  // Script para abrir/cerrar el menú móvil
-  document.getElementById("menuBtn").addEventListener("click", () => {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  });
-  
-</script>
+    <!-- Buscador (solo móvil, debajo del header) -->
+    <div class="md:hidden px-4 pb-2">
+      <input type="text" id="searchInputMobile" placeholder="Buscar productos..."
+        class="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black placeholder-gray-500">
     </div>
-  </div>
-</header>
+
+    <!-- Menú móvil -->
+    <div id="mobileMenu" class="md:hidden hidden bg-[#0a0f2c] text-white pb-4 px-4 mt-2">
+      <nav class="flex flex-col gap-3 text-lg">
+        <a href="https://web.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr#" target="_blank" class="hover:underline">
+          Facebook
+        </a>
+        <a href="colecciones.html" class="hover:underline">
+          Joyería en General
+        </a>
+        <a href="perforadores.html" class="hover:underline">
+          Perforadores Corporales
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    // Buscador global (funciona en PC y móvil)
+    function buscar(inputId) {
+      const searchInput = document.getElementById(inputId);
+      if (!searchInput) return;
+      searchInput.addEventListener('keyup', () => {
+        const filter = searchInput.value.toLowerCase();
+        document.querySelectorAll('.oro-product, .novedades-product, .promo-product')
+          .forEach(product => {
+            const name = product.dataset.name.toLowerCase();
+            const desc = product.dataset.desc.toLowerCase();
+            product.style.display = (name.includes(filter) || desc.includes(filter)) ? "block" : "none";
+          });
+      });
+    }
+
+    buscar('searchInput');        // PC
+    buscar('searchInputMobile');  // Móvil
+
+    // Menú móvil toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
+</body>
+
+
+   
 <style>@keyframes slideUp {
   0% {
     opacity: 0;
@@ -445,26 +485,20 @@ background: linear-gradient(
           <div class="particles"></div>
         </div>
         <div class="overlay">
-          <span>Colección</span>
-          <span>Lumière</span>
-          <span>—</span>
-          <span>Brillo</span>
-          <span>eterno</span>
+          <span>Colecciones en joyeria y Piercings</span>
+          
         </div>
       </div>
 
       <!-- Slide 2 -->
       <div class="slide w-full h-full relative">
         <div class="shine-box w-full h-full">
-          <img src="img/oro/4.jpg" alt="Anillos de oro rosa">
+          <img src="img/oro/16.jpg" alt="Anillos de oro rosa">
           <div class="particles"></div>
         </div>
         <div class="overlay">
           <span>Anillos</span>
-          <span>Apilables</span>
-          <span>—</span>
-          <span>Oro</span>
-          <span>Rosa</span>
+         
         </div>
       </div>
 
@@ -475,11 +509,8 @@ background: linear-gradient(
           <div class="particles"></div>
         </div>
         <div class="overlay">
-          <span>Minimal</span>
-          <span>Pulseras</span>
-          <span>—</span>
-          <span>Silver</span>
-          <span>Plata</span>
+          <span>Minimal-oro plateados 50 descuentos en la scompras</span>
+         
         </div>
       </div>
 
@@ -647,140 +678,171 @@ document.addEventListener("DOMContentLoaded", () => {
 
   <!-- SECCIONES / CATEGORÍAS -->
   <!-- SECCIONES / CATEGORÍAS -->
-<!-- SECCIONES / CATEGORÍAS -->
-<section id="colecciones" class="bg-[#0a0f2c] py-20 w-full">
-  <!-- Contenedor centrado pero dentro de la franja -->
+<!-- SECCIÓN JOYERÍA DE ORO -->
+<!-- SECCIÓN JOYERÍA DE ORO -->
+<section id="oro" class="bg-[#0a0f2c] py-20 w-full"> 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
     
     <!-- Título y subtítulo -->
     <div class="section-header mb-12">
-      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE OROssss</h2>
+      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE ORO</h2>
       <span class="section-sub text-xl opacity-90 block mt-2">
-        Descubre piezas únicas para cada ocasión
+        Brillo y elegancia en piezas exclusivas
       </span>
     </div>
 
-    <div class="product-row">
-      <div class="grid">
-        <!-- 5 productos (ejemplo) -->
-        <article class="product" data-name="Anillo Aura" data-price="S/ 420" 
-        data-desc="Oro 18k con circonia de corte brillante." data-img="img/oro/1.jpg">
-          <img src="img/oro/1.jpg" alt="Anillo Aura en oro 18k">
-          <div class="p-name">Anillo Aura</div>
-          <div class="p-price">S/ 420</div>
-        </article>
-        <article class="product" data-name="Anillo Solstice" data-price="S/ 590"
-         data-desc="Oro rosa 18k con detalle minimal." data-img="img/oro/2.jpg">
-          <img src="img/oro/2.jpg" alt="Anillo Solstice en oro rosa">
-          <div class="p-name">Solstice</div>
-          <div class="p-price">S/ 590</div>
-        </article>
-        <article class="product" data-name="Anillo Eterna" data-price="S/ 680" 
-        data-desc="Aro fino con incrustaciones sutiles." data-img="img/oro/3.jpg">
-          <img src="img/oro/3.jpg" alt="Anillo Eterna con incrustaciones">
-          <div class="p-name">Eterna</div>
-          <div class="p-price">S/ 680</div>
-        </article>
-        <article class="product" data-name="Anillo Nova" data-price="S/ 520" 
-        data-desc="Diseño geométrico en oro amarillo." 
-        data-img="img/oro/4.jpg">
-          <img src="img/oro/4.jpg" alt="Anillo Nova geométrico">
-          <div class="p-name">Nova</div>
-          <div class="p-price">S/ 520</div>
-        </article>
-        <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/5.jpg">
-          <img src="img/oro/5.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/6.jpg">
-          <img src="img/oro/6.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/7.jpg">
-          <img src="img/oro/7.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/8.jpg">
-          <img src="img/oro/8.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-         <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/9.jpg">
-          <img src="img/oro/9.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-          <article class="product" data-name="Anillo Brio" data-price="S/ 390" data-desc="Acabado pulido con brillo intenso." 
-        data-img="img/oro/10.jpg">
-          <img src="img/oro/10.jpg" alt="Anillo Brio acabado pulido">
-          <div class="p-name">Brio</div>
-          <div class="p-price">S/ 390</div>
-        </article>
-      </div>
-    </div>
-  </section>
-  <!-- Modal producto -->
-<div id="productModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-y-auto">
-  <div class="bg-white text-gray-900 w-full h-full sm:h-auto sm:max-w-lg rounded-none sm:rounded-2xl overflow-y-auto p-6 relative shadow-2xl mx-0 sm:mx-2 my-0 sm:my-8">
-    
-    <!-- Botón de cerrar -->
-    <button onclick="closeProduct()" 
-            class="fixed top-4 right-4 bg-black/70 text-white p-2 rounded-full text-3xl z-50">
-      ✕
-    </button>
+    <!-- Grid de productos (clases exclusivas de oro) -->
+    <div class="oro-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      
+      <!-- Producto -->
+      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Anillo Real" data-price="S/ 850" data-desc="Anillo de oro 18k con incrustaciones de zircon" 
+        data-img="img/oro/1.jpg">
+        <img src="img/oro/1.jpg" alt="Anillo Real de oro 18k"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Anillo Real</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 850</div>
+      </article>
 
-    <!-- Contenido del modal -->
-    <div class="text-center">
-      <img id="modalImg" src="" alt="" class="w-full h-64 object-cover rounded-xl shadow-md mb-4">
-      <h3 id="modalName" class="text-2xl font-bold mb-2"></h3>
-      <p id="modalPrice" class="text-xl font-semibold text-pink-600 mb-3"></p>
-      <p id="modalDesc" class="text-gray-600"></p>
+      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Collar Imperial" data-price="S/ 1250" data-desc="Collar de oro con diseño clásico" 
+        data-img="img/oro/2.jpg">
+        <img src="img/oro/2.jpg" alt="Collar Imperial oro 18k"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Collar Imperial</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 1250</div>
+      </article>
+
+      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Aretes Sol" data-price="S/ 650" data-desc="Aretes de oro amarillo con forma solar" 
+        data-img="img/oro/3.jpg">
+        <img src="img/oro/3.jpg" alt="Aretes Sol oro 18k"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Aretes Sol</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 650</div>
+      </article>
+
+      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Pulsera Elegance" data-price="S/ 970" data-desc="Pulsera de oro con eslabones finos" 
+        data-img="img/oro/4.jpg">
+        <img src="img/oro/4.jpg" alt="Pulsera Elegance oro 18k"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Pulsera Elegance</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 970</div>
+      </article>
+
+      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/5.jpg">
+        <img src="img/oro/5.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+       <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/6.jpg">
+        <img src="img/oro/6.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+ <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/7.jpg">
+        <img src="img/oro/7.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+ <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/8.jpg">
+        <img src="img/oro/8.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+ <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/9.jpg">
+        <img src="img/oro/9.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+
+
+       <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
+        data-img="img/oro/10.jpg">
+        <img src="img/oro/10.jpg" alt="Sortija Clásica oro"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
+        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
+      </article>
+
+
+      <!-- 👉 Repite los demás artículos igual -->
     </div>
+  </div>
+</section>
+
+<!-- MODAL EXCLUSIVO ORO -->
+<div id="oroModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+    <button id="closeOroModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">
+      <i class="fa fa-times text-xl"></i>
+    </button>
+    <img id="oroImg" src="" alt="" class="w-full h-56 object-cover rounded-md mb-4">
+    <h3 id="oroName" class="text-xl font-bold text-gray-800"></h3>
+    <p id="oroPrice" class="text-yellow-600 font-semibold text-lg mt-2"></p>
+    <p id="oroDesc" class="text-gray-600 mt-3 text-sm"></p>
   </div>
 </div>
 
-
 <script>
-  // Abrir modal al dar clic en producto
-  document.querySelectorAll(".product").forEach(product => {
-    product.addEventListener("click", () => {
-      document.getElementById("modalName").textContent = product.dataset.name;
-      document.getElementById("modalPrice").textContent = product.dataset.price;
-      document.getElementById("modalDesc").textContent = product.dataset.desc;
-      document.getElementById("modalImg").src = product.dataset.img;
+// Selecciona solo los productos de oro
+const oroProducts = document.querySelectorAll('.oro-product');
+const oroModal = document.getElementById('oroModal');
+const oroImg = document.getElementById('oroImg');
+const oroName = document.getElementById('oroName');
+const oroPrice = document.getElementById('oroPrice');
+const oroDesc = document.getElementById('oroDesc');
+const closeOroModal = document.getElementById('closeOroModal');
 
-      document.getElementById("productModal").classList.remove("hidden");
-    });
+// Abrir modal
+oroProducts.forEach(product => {
+  product.addEventListener('click', () => {
+    oroImg.src = product.dataset.img;
+    oroName.textContent = product.dataset.name;
+    oroPrice.textContent = product.dataset.price;
+    oroDesc.textContent = product.dataset.desc;
+    oroModal.classList.remove('hidden');
+    oroModal.classList.add('flex');
   });
+});
 
-  // Cerrar modal
-  function closeProduct(){
-    document.getElementById("productModal").classList.add("hidden");
+// Cerrar modal
+closeOroModal.addEventListener('click', () => {
+  oroModal.classList.add('hidden');
+  oroModal.classList.remove('flex');
+});
+
+// Cerrar clic afuera
+oroModal.addEventListener('click', (e) => {
+  if (e.target === oroModal) {
+    oroModal.classList.add('hidden');
+    oroModal.classList.remove('flex');
   }
-
-  // También cerrar si se toca el fondo oscuro
-  document.getElementById("productModal").addEventListener("click", function(e){
-    if(e.target.id === "productModal"){
-      closeProduct();
-    }
-  });
+});
 </script>
 
-
-
  <!-- Font Awesome 6 -->
-  <link 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-    rel="stylesheet" 
-  />
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100">
 
@@ -836,10 +898,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     <!-- Título y subtítulo -->
   
-
-
-  <section id="novedades" class="bg-[#0a0f2c] py-20 w-full">
-     <!-- Contenedor centrado pero dentro de la franja -->
+<!-- SECCIÓN NOVEDADES -->
+<section id="novedades" class="bg-[#0a0f2c] py-20 w-full"> 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
     
     <!-- Título y subtítulo -->
@@ -849,72 +909,174 @@ document.addEventListener("DOMContentLoaded", () => {
         Descubre piezas únicas para cada ocasión
       </span>
     </div>
-    <div class="product-row">
-      <div class="grid">
-        <article class="product" data-name="Navel Titanio" data-price="S/ 180" data-desc="con piedras de opalo y zircon" 
+
+    <!-- Grid de productos (clases exclusivas de novedades) -->
+    <div class="novedades-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      
+      <!-- Producto -->
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/1.jpg">
-          <img src="img/titanioo/1.jpg" alt=" con piedras de opalo y zircon">
-          <div class="p-name">Navel Titanio transparente AB CZ  con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 180</div>
-        </article>
-        <article class="product" data-name="Navel piercing" data-price="S/ 200" data-desc="con doble gema trasnparente" 
+        <img src="img/titanioo/1.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel piercing" data-price="S/ 200" data-desc="Con doble gema transparente" 
         data-img="img/titanioo/2.jpg">
-          <img src="img/titanioo/2.jpg" alt="con doble gema trasnparente">
-          <div class="p-name">Navel piercing con doble gema trasnparente</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-        <article class="product" data-name="Piercing de titanio" data-price="S/ 200" data-desc="Cpara ombligo doble opalo blanco"
-         data-img="img/titanioo/3.jpg">
-          <img src="img/titanioo/3.jpg" alt="para ombligo doble opalo blanco">
-          <div class="p-name">Piercing de titanio para ombligo doble opalo blanco</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-        <article class="product" data-name="Piercing para ombligo anonizado " data-price="S/ 180" data-desc="con opalo sintetico" 
+        <img src="img/titanioo/2.jpg" alt="con doble gema trasnparente"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel piercing</div>
+        <div class="p-price text-blue-600 font-bold">S/ 200</div>
+      </article>
+
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
+        data-img="img/titanioo/3.jpg">
+        <img src="img/titanioo/3.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/4.jpg">
-          <img src="img/titanioo/4.jpg" alt="con opalo sintetico">
-          <div class="p-name">Piercing para ombligo anonizado con opalo sintetico</div>
-          <div class="p-price">S/ 180</div>
-        </article>
-        <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        <img src="img/titanioo/4.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/5.jpg">
-          <img src="img/titanioo/5.jpg" alt="con piedras de opalo y zircon">
-          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-         <article class="product" data-name="Piercing para ombligo anonizado " data-price="S/ 180" data-desc="con opalo sintetico" 
+        <img src="img/titanioo/5.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/6.jpg">
-          <img src="img/titanioo/6.jpg" alt="con opalo sintetico">
-          <div class="p-name">Piercing para ombligo anonizado con opalo sintetico</div>
-          <div class="p-price">S/ 180</div>
-        </article>
-        <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        <img src="img/titanioo/6.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/7.jpg">
-          <img src="img/titanioo/7.jpg" alt="con piedras de opalo y zircon">
-          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        <img src="img/titanioo/7.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/8.jpg">
-          <img src="img/titanioo/8.jpg" alt="con piedras de opalo y zircon">
-          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        <img src="img/titanioo/8.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/9.jpg">
-          <img src="img/titanioo/9.jpg" alt="con piedras de opalo y zircon">
-          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-         <article class="product" data-name="Navel titanio" data-price="S/ 200" data-desc="con piedras de opalo y zircon" 
+        <img src="img/titanioo/9.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
         data-img="img/titanioo/10.jpg">
-          <img src="img/titanioo/10.jpg" alt="con piedras de opalo y zircon">
-          <div class="p-name">Navel titanio con piedras de opalo y zircon</div>
-          <div class="p-price">S/ 200</div>
-        </article>
-        
-      </div>
+        <img src="img/titanioo/10.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
+        data-img="img/titanioo/11.jpg">
+        <img src="img/titanioo/11.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+      
+      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
+        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
+        data-img="img/titanioo/12.jpg">
+        <img src="img/titanioo/12.jpg" alt=" con piedras de opalo y zircon"
+             class="w-full h-40 object-cover rounded-md">
+        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
+        <div class="p-price text-blue-600 font-bold">S/ 180</div>
+      </article>
+
+      <!-- 👉 Repite los demás artículos con el mismo formato -->
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- MODAL EXCLUSIVO NOVEDADES -->
+<div id="novedadesModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+    <button id="closeNovedadesModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">
+      <i class="fa fa-times text-xl"></i>
+    </button>
+    <img id="novedadesImg" src="" alt="" class="w-full h-56 object-cover rounded-md mb-4">
+    <h3 id="novedadesName" class="text-xl font-bold text-gray-800"></h3>
+    <p id="novedadesPrice" class="text-blue-600 font-semibold text-lg mt-2"></p>
+    <p id="novedadesDesc" class="text-gray-600 mt-3 text-sm"></p>
+  </div>
+</div>
+
+<script>
+// Selecciona solo los productos de novedades
+const novedadesProducts = document.querySelectorAll('.novedades-product');
+const novedadesModal = document.getElementById('novedadesModal');
+const novedadesImg = document.getElementById('novedadesImg');
+const novedadesName = document.getElementById('novedadesName');
+const novedadesPrice = document.getElementById('novedadesPrice');
+const novedadesDesc = document.getElementById('novedadesDesc');
+const closeNovedadesModal = document.getElementById('closeNovedadesModal');
+
+// Abrir modal
+novedadesProducts.forEach(product => {
+  product.addEventListener('click', () => {
+    novedadesImg.src = product.dataset.img;
+    novedadesName.textContent = product.dataset.name;
+    novedadesPrice.textContent = product.dataset.price;
+    novedadesDesc.textContent = product.dataset.desc;
+    novedadesModal.classList.remove('hidden');
+    novedadesModal.classList.add('flex');
+  });
+});
+
+// Cerrar modal
+closeNovedadesModal.addEventListener('click', () => {
+  novedadesModal.classList.add('hidden');
+  novedadesModal.classList.remove('flex');
+});
+
+// Cerrar clic afuera
+novedadesModal.addEventListener('click', (e) => {
+  if (e.target === novedadesModal) {
+    novedadesModal.classList.add('hidden');
+    novedadesModal.classList.remove('flex');
+  }
+});
+</script>
+
 <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 </head>
@@ -926,18 +1088,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <!-- Foto encargada -->
       <div class="flex justify-center">
-        <img id="fotoEncargada" src="encargada1.jpg" alt="Encargada" 
+        <img id="fotoEncargada" src="img/oro/16.jpg" alt="Encargada" 
              class="w-80 h-80 object-cover rounded-2xl shadow-lg transition duration-700 ease-in-out">
       </div>
 
       <!-- Info + Contadores -->
       <div class="space-y-8">
-        <h2 class="text-3xl font-bold text-[#0a0f2c]">Conoce a Nuestra Encargada</h2>
+        <h2 class="text-3xl font-bold text-[#0a0f2c]">Conoce  Nuestros productos</h2>
         <p class="text-gray-600">
-          Ella lidera el equipo de <b>Coyotes Tattoo & Piercings</b>, garantizando calidad,
-          confianza y un servicio personalizado para cada cliente.
-        </p>
-
+          En <b>Coyote Body Piercings</b> nos especializamos en ofrecer 
+            <b>joyería de alta calidad</b> para piercings. 
+            Contamos con <b>acero quirúrgico</b>, <b>titanio hipoalergénico</b>, 
+            <b>oro</b> y <b>acrílicos seguros</b>, garantizando comodidad, estilo 
+            y total seguridad para tu piel.  
+            Cada pieza está diseñada para que expreses tu identidad con confianza 
+            y el respaldo de un servicio profesional.
+          </p>
+       
         <!-- Contadores -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
 
@@ -996,7 +1163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(iniciarContadores, 7000);
 
     // Cambio de foto
-    const fotos = ["45.png", "14.png"]; // <-- tus dos fotos
+    const fotos = ["img/oro/1.jpg", "img/oro/17.jpg"]; // <-- tus dos fotos
     let indexFoto = 0;
     const img = document.getElementById("fotoEncargada");
 
@@ -1005,6 +1172,7 @@ document.addEventListener("DOMContentLoaded", () => {
       img.src = fotos[indexFoto];
     }, 5000); // cambia cada 5 segundos
   </script>
+  
   <!-- Footer -->
 <footer style="background:#111; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
   <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
@@ -1016,7 +1184,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
         Facebook
       </a>
-      <a href="https://www.instagram.com/coyotestattooperu/" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
+      <a href=https://www.instagram.com/coyotesbodypiercing/ target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
         <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
         Instagram
       </a>
@@ -1143,4 +1311,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 </body>
 </html>
+
+
+  
+
 
