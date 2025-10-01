@@ -1,1318 +1,805 @@
+
+  
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-   <script src="https://cdn.tailwindcss.com"></script>
-  <title>Orfebrería Aurora — Joyería Fina</title>
-
-  <!-- Tipografías elegantes -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-   background: #ffffff;
-
-      --surface:#0a0f2c;
-      --surface-2:#ffffff;
-      --text:#0a0f2c;
-      --muted:#ffffff;
-      --gold:#0f0f10;
-      --gold-2:#b6902f;
-      --ring:rgba(212,175,55,0.25);
-      --radius:18px;
-      --gap:18px;
-      --shadow:0 10px 30px rgba(0,0,0,.35);
-    }
-
-    .p-name {
-  color: #000000; /* negro */
-}
-
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-    img{display:block;max-width:100%;height:auto}
-
-
-
- /* muestra el contenido del data-desc  .product::after 
-  { content: attr(data-desc);  display: block; color: #000000; /* negro  font-size: 14px;
-  margin-top: 5px;}*/
-
-    /* NAVBAR */
- .navbar {
-background: linear-gradient(
-  90deg, 
-  #0a0f2c 0%,    /* azul muy oscuro casi negro   */
-  #0a0f2c 40%,   /* azul oscuro */
-  #0a0f2c 70%,   /* azul grisáceo */
-  #0a0f2c 100%   /* azul oscuro más claro */
-);
-
-  padding: 10px 20px;
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: silver; /* platería */
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.brand-logo {
-  height: 40px;
-  width: auto;
-  margin-right: 10px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 15px;
-}
-
-.nav-btn {
-  text-decoration: none;
-  color: silver;
-  font-weight: bold;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.nav-btn:hover {
-  color: #d4af37; /* dorado */
-}
-
-
-/* 📱 Responsive: en celulares */
-@media (max-width: 768px) {
-  .navbar-container {
-    flex-direction: column; /* apilar contenido */
-    align-items: center;
-  }
-
-  .nav-links {
-    margin-top: 10px;
-    flex-direction: column; /* botones uno debajo del otro */
-    align-items: center;
-    gap: 10px;
-  }
-
-  .brand {
-    margin-bottom: 10px;
-  }
-}
-
-    /* CARRUSEL */
-    .hero.fullwidth {
-  max-width: 100% !important;
-  margin: 26px 0 0 0 !important;
-  padding: 0; /* opcional, elimina padding lateral si quieres */
-}
-.slide{
-  min-width:100%; 
-  height:80vh; /* ocupa 80% del alto de la pantalla */
-  max-height:700px; /* limita en pantallas muy grandes */
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-
-    .carousel{
-      position:relative; overflow:hidden; border-radius:var(--radius);
-      background:linear-gradient(180deg,#141414,#0f0f0f);
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,.06);
-    }
-    .carousel-track{
-      display:flex; transition: transform .45s ease-in-out;
-    }
-    
-  
-    /* Overlay inicia invisible y bajito */
-.overlay span {
-  opacity: 0;
-  transform: translateY(20px);
-  display: inline-block;
-  transition: all 0.5s ease;
-}
-
-.overlay span.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-    .ctrl{
-      position:absolute; inset:0; pointer-events:none;
-    }
-    .ctrl button{
-      pointer-events:auto; position:absolute; top:50%; transform:translateY(-50%);
-      border:none; width:42px; height:42px; border-radius:50%;
-      display:grid; place-items:center; cursor:pointer;
-      background:rgba(0,0,0,.5); color:#fff; font-size:18px;
-      box-shadow:0 6px 16px rgba(0,0,0,.4);
-    }
-    .ctrl .prev{ left:12px }
-    .ctrl .next{ right:12px }
-    .dots{ position:absolute; left:0; right:0; bottom:10px; display:flex; gap:8px; justify-content:center }
-    .dot{ width:8px; height:8px; border-radius:999px; background:rgba(255,255,255,.35); border:1px solid rgba(255,255,255,.3) }
-    .dot.active{ background:var(--gold); border-color:var(--gold-2) }
-
-    /* SECCIONES / CATEGORÍAS */
-    .section{
-      max-width:1200px; margin:34px auto 0; padding:0 18px;
-    }
-  .section-header {
-  display: flex;
-  flex-direction: column;   /* uno debajo del otro */
-  align-items: center;      /* centra en horizontal */
-  justify-content: center;  /* centra en vertical */
-  text-align: center;       /* centra el texto */
-  gap: 6px;                 /* pequeña separación entre título y subtítulo */
-  margin-bottom: 20px;      /* espacio con la grilla de productos */
-}
-
-.section-title, 
-.section-sub {
-  text-align: center;
-  width: 100%;
-}
-.slide img{
-  width:100%;
-  height:100%;
-  object-fit:cover; /* mantiene proporción y llena el contenedor */
-}
-
-
-    .section-sub{ color:var(--muted); font-size:14px }
-    .product-row{
-      background:var(--surface); border:1px solid rgba(225, 54, 54, 0.06);
-      border-radius:var(--radius); padding:16px; box-shadow: var(--shadow);
-    }
-    .grid{
-      display:grid; gap:var(--gap);
-      grid-template-columns:repeat(5, minmax(0,1fr));
-    }
-    .product{
-      background:var(--surface-2); border:1px solid rgba(101, 176, 223, 0.08);
-      border-radius:16px; padding:12px; text-align:center;
-      transition: transform .15s ease, box-shadow .2s ease, border-color .2s ease;
-      cursor:pointer;
-    }
-    .product:hover{ transform: translateY(-4px); border-color:var(--ring); box-shadow:0 0 0 6px var(--ring) }
-    .product img{
-      width:100%; aspect-ratio: 1 / 1; object-fit:cover; border-radius:12px;
-      box-shadow: inset 0 0 0 1px rgba(239, 6, 6, 0.06);
-    }
-    .p-name{ margin:10px 0 4px; font-weight:600 }
-    .p-price{ color:var(--gold); font-weight:600 }
-
-    /* MODAL (Vista rápida) */
-    .modal{
-      position:fixed; inset:0; background:rgba(0,0,0,.6);
-      display:none; align-items:center; justify-content:center; padding:18px; z-index:60;
-    }
-    .modal.open{ display:flex }
-    .modal-card{
-      width:min(980px, 100%); background:linear-gradient(180deg,#00BFFF,#00BFFF);/* MODAL  de vsiat de los productos(Vista rápida) */
-      border:1px solid rgba(255,255,255,.08); border-radius:18px; overflow:hidden;
-      box-shadow:0 30px 70px rgba(0,0,0,.6);
-      display:grid; grid-template-columns: 1.2fr 1fr;
-    }
-    .modal-media{
-      background:#000; display:flex; align-items:center; justify-content:center;
-      border-right:1px solid rgba(255,255,255,.06);
-    }
-    .modal-media img{
-      width:100%; height:100%; object-fit:contain; max-height:72vh;
-    }
-    .modal-info{ padding:22px }
-    .modal-title{ font-family:"Playfair Display",serif; font-size:26px; margin:0 0 10px }
-    .modal-price{ color:var(--gold); font-size:20px; font-weight:700; margin-bottom:10px }
-    .modal-desc{ color: #000000; /* negro */; line-height:1.6; margin-bottom:18px }
-    .modal-actions{ display:flex; gap:10px; flex-wrap:wrap }
-    .btn{
-      appearance:none; border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg,#1a1a1a,#111); color:var(--text);
-      padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:600;
-      transition: transform .15s ease, border-color .15s ease, box-shadow .2s ease;
-    }
-    .btn:hover{ border-color:var(--ring); box-shadow:0 0 0 6px var(--ring) }
-    .btn.gold{ background:linear-gradient(180deg, var(--gold), var(--gold-2)); color:#111; border-color:rgba(0,0,0,.3) }
-    .close-x{
-      position:absolute; right:20px; top:16px; width:36px; height:36px; border-radius:50%;
-      display:grid; place-items:center; font-size:20px; color:#fff; background:rgba(0,0,0,.5); border:1px solid rgba(255,255,255,.1);
-      cursor:pointer;
-    }
-    .close-x:hover{ background:rgba(0,0,0,.65) }
-
-    /* CONTACTO */
-    .contact{
-      max-width:1200px; margin:40px auto 60px; padding:0 18px;
-      display:grid; gap:var(--gap); grid-template-columns:1.2fr 1fr;
-    }
-    .card{
-      background:var(--surface); border:1px solid rgba(255,255,255,.06);
-      border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
-    }
-    .card h3{ font-family:"Playfair Display",serif; margin:0 0 10px }
-    .muted{ color:var(--muted) }
-
-    /* FOOTER */
-    footer{
-      border-top:1px solid rgba(255,255,255,.08);
-      padding:18px; text-align:center; color:var(--muted);
-      background:#0e0e0e;
-    }
-
-    /* RESPONSIVE */
-  /* ---------- Mostrar y centrar los botones en móviles ---------- */
-/* Reemplaza/añade esta sección en tu CSS (sustituye la regla @media anterior) */
-@media (max-width: 860px){
-  /* Nav: logo arriba, botones debajo y centrados */
-  .nav-inner {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 8px;
-  }
-
-  /* Mostrar los links en columna y centrarlos */
-  .nav-links {
-    display: flex !important;        /* fuerza visible si había display:none */
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-top: 8px;
-    padding: 0;
-  }
-
-  /* Botones del nav en bloque para que se toquen mejor en móvil */
-  .nav-btn {
-    width: auto;
-    padding: 10px 18px;
-    font-size: 15px;
-    text-align: center;
-  }
-
-  /* Mantener el nombre de marca centrado */
-  .brand, .brand-name {
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  /* Ajustes de layout móvil para secciones y modal */
-  .grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  .modal-card { grid-template-columns: 1fr; }
-  .modal-media img { max-height:46vh; }
-
-  /* Asegura que los encabezados de sección queden centrados en móvil */
-  .section-header { 
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    text-align: center;
-  }
-}
-
-/* ---------- Centrar textos de producto (si aún no lo tienes) ---------- */
-.product{
-  display: flex;
-  flex-direction: column;
-  align-items: center;    /* centra horizontalmente la foto y texto */
-  justify-content: flex-start;
-  text-align: center;     /* centra nombres y precios */
-}
-
-/* Asegurar que nombre y precio se muestren centrados */
-.p-name, .p-price {
-  width: 100%;
-  text-align: center;
-}
-
-/* Centrar texto dentro del modal en móvil, mantener a la izquierda en escritorio */
-.modal-info { text-align: left; }
-@media (max-width: 860px){
-  .modal-info { text-align: center; }
-}
-
-/* (Opcional) Centrar overlay del carrusel */
-.slide .overlay { text-align: center; left: 50%; transform: translateX(-50%); width: auto; max-width: calc(100% - 40px); }
-
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cheyenne Tattoo Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-color:#162b2d; color:#0c052c; font-family:sans-serif;">
 
-  <!-- NAVBAR -->
- <!-- NAVBAR --> 
 
- <!-- NAVBAR -->
-<body class="bg-azul text-gray-900">
-  <!-- Navbar -->
-  <header class="sticky top-0 z-40 bg-[#0a0f2c] border-b border-[#0a0f2c]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-6">
-        
-        <!-- Logo -->
-        <div class="flex items-center gap-6 text-white">
-          <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
-        </div>
 
-        <!-- Bloque central: iconos -->
-        <div class="flex items-center gap-6 text-white">
-          <!-- Joyeria -->
-          <a href="colecciones.html" class="flex items-center gap-2 hover:underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="#FFD700" viewBox="0 0 24 24" stroke="#FFD700" stroke-width="2">
-              <path d="M12 3l3.09 5.5L12 14l-3.09-5.5L12 3z" />
-              <path d="M2 9l10 12L22 9H2z" />
-            </svg>
-            <span class="hidden md:inline font-semibold text-lg">JOYERÍA EN GENERAL</span>
-          </a>
+  <!-- Header #0c2451a4  #4fb3bb #040c1ca4  , -->
+   <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
-          <!-- Perforadores -->
-          <a href="perforadores.html" class="flex items-center gap-2 hover:underline">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="#40E0D0" stroke-width="2">
-              <circle cx="12" cy="12" r="9" stroke="#40E0D0" />
-              <circle cx="16" cy="12" r="2.5" fill="#40E0D0" />
-            </svg>
-            <span class="hidden md:inline font-semibold text-lg">PERFORADORES CORPORALES</span>
-          </a>
-        </div>
+<header class="bg-[#F5DEB3] border-b border-[#C89F6D] shadow">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
+    
+    <!-- Logo con título -->
+    <div class="flex items-center gap-3">
+      <img src="logo coyotes tattoo.png" alt="Logo Cheyenne" class="w-20 h-20 object-contain"style="color:#0a0a0a;"> 
+      <h1 class="text-2xl" style="font-family: 'Rubik Wet Paint', cursive; color:#f0eeee;">
+      Body Piercings
+      </h1>
+    </div>
 
-        <!-- Botón menú móvil -->
-        <button id="menuBtn" class="md:hidden p-2 border rounded text-white">☰</button>
+    <!-- Botón carrito -->
+    <button onclick="toggleCart()" class="relative px-4 py-2 bg-[#FFD700] text-black rounded-lg"style="color:#fffdfd;">
+      Carrito
+      <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
+    </button>
 
-        <!-- Buscador (solo visible en PC) -->
-        <div class="hidden md:block md:w-64">
-          <input type="text" id="searchInput" placeholder="Buscar productos..."
-            class="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black placeholder-gray-500">
-        </div>
+
+<!-- Botón de búsqueda en el header (solo ícono) -->
+
+<!-- Botón de búsqueda en el header (solo ícono) -->
+
+
+
+
+
+<!-- Ventana flotante de búsqueda -->
+<div id="searchOverlay" 
+     class="fixed inset-0 bg-black bg-opacity-80 hidden z-50 flex flex-col">
+  
+  <!-- Barra superior -->
+  <div class="bg-white p-4 flex justify-between items-center">
+    <input id="searchInput" type="text" 
+      placeholder="Buscar productos..." 
+      class="flex-1 px-4 py-2 border rounded mr-4"
+      oninput="searchProducts(this.value)" />
+    <button onclick="closeSearch()" class="text-red-500 text-2xl">&times;</button>
+  </div>
+  
+  <!-- Resultados -->
+  <div id="searchResults" 
+       class="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 overflow-y-auto">
+    <!-- Aquí van los resultados -->
+  </div>
+</div>
+
+<script>
+  function openSearch(){
+    document.getElementById("searchOverlay").classList.remove("hidden");
+    document.getElementById("searchInput").focus();
+  }
+
+  function closeSearch(){
+    document.getElementById("searchOverlay").classList.add("hidden");
+    document.getElementById("searchResults").innerHTML = "";
+    document.getElementById("searchInput").value = "";
+  }
+
+  function searchProducts(query){
+    query = query.toLowerCase();
+    const all = [...productos.oro, ...productos.titanio];
+    const results = all.filter(p => p.title.toLowerCase().includes(query));
+
+    const container = document.getElementById("searchResults");
+    container.innerHTML = results.length ? results.map(prod => `
+      <div class="bg-white rounded-xl shadow-lg p-4 text-center">
+        <img src="${prod.img}" onclick="openModal('${prod.img}')" 
+             class="w-full h-40 object-cover rounded-lg cursor-pointer"/>
+        <h3 class="mt-3 font-semibold">${prod.title}</h3>
+        <p class="font-bold mt-2">S/ ${prod.price.toFixed(2)}</p>
+        <a href="producto.html?id=${prod.id}" 
+           class="mt-3 inline-block px-3 py-2 border rounded-lg hover:bg-[#C89F6D] hover:text-white">
+          Ver más
+        </a>
       </div>
-    </div>
+    `).join("") : "<p class='text-white text-lg'>No se encontraron productos.</p>";
+  }
+</script>
 
-    <!-- Buscador (solo móvil, debajo del header) -->
-    <div class="md:hidden px-4 pb-2">
-      <input type="text" id="searchInputMobile" placeholder="Buscar productos..."
-        class="w-full p-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-black placeholder-gray-500">
-    </div>
-
-    <!-- Menú móvil -->
-    <div id="mobileMenu" class="md:hidden hidden bg-[#0a0f2c] text-white pb-4 px-4 mt-2">
-      <nav class="flex flex-col gap-3 text-lg">
-        <a href="https://web.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr#" target="_blank" class="hover:underline">
-          Facebook
-        </a>
-        <a href="colecciones.html" class="hover:underline">
-          Joyería en General
-        </a>
-        <a href="perforadores.html" class="hover:underline">
-          Perforadores Corporales
-        </a>
-      </nav>
-    </div>
-  </header>
-
-  <script>
-    // Buscador global (funciona en PC y móvil)
-    function buscar(inputId) {
-      const searchInput = document.getElementById(inputId);
-      if (!searchInput) return;
-      searchInput.addEventListener('keyup', () => {
-        const filter = searchInput.value.toLowerCase();
-        document.querySelectorAll('.oro-product, .novedades-product, .promo-product')
-          .forEach(product => {
-            const name = product.dataset.name.toLowerCase();
-            const desc = product.dataset.desc.toLowerCase();
-            product.style.display = (name.includes(filter) || desc.includes(filter)) ? "block" : "none";
-          });
-      });
-    }
-
-    buscar('searchInput');        // PC
-    buscar('searchInputMobile');  // Móvil
-
-    // Menú móvil toggle
-    const menuBtn = document.getElementById('menuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-</body>
+<button onclick="openSearch()" 
+  class="p-2 bg-[#4fb3bb] text-white rounded-full ml-4">
+  🔍
+  <span>Buscar</span>
+</button>
+    <!-- Menú hamburguesa -->
+    <button id="menuBtn" class="text-3xl text-[#C89F6D] focus:outline-none ml-4"style="color:#fffdfd;">
+      ☰
+    </button>
+    
+  </div>
+</header>
 
 
+  <!-- Menú colapsable (oculto hasta que se abra) -->
+  <nav id="mobileMenu" class="hidden flex-col bg-[#F5F5DC] px-6 pb-4">
+    <a href="index.html" class="block py-2 text-[#333] hover:text-[#FFD700]"style="color:#FFFFFF
+">Inicio</a>
+    <a href="perforadores.html" class="block py-2 text-[#333] hover:text-[#FFD700]"style="color:#FFFFFF
+">Perforadores</a>
    
-<style>@keyframes slideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    <a href="#" class="block py-2 text-[#333] hover:text-[#FFD700]"style="color:#FFFFFF
+">Facebook</a>
+    <a href="#" class="block py-2 text-[#333] hover:text-[#FFD700]"style="color:#FFFFFF
+">Instagram</a>
+  </nav>
+</header>
+
+<script>
+  // Toggle menú hamburguesa
+  const menuBtn = document.getElementById("menuBtn");
+  const mobileMenu = document.getElementById("mobileMenu");
+
+  menuBtn.addEventListener("click", () => {
+    mobileMenu.classList.toggle("hidden");
+  });
+</script>
+
+<!-- Carrusel -->
 
 
-</style>
+<!-- Carrusel -->
 
-<!-- HERO / CARRUSEL -->
-<!-- HERO / CARRUSEL -->
-<section id="inicio" class="hero relative w-full h-[600px] overflow-hidden">
+
+<section id="inicio" class="hero relative w-full h-[400px] overflow-hidden">
   <div class="carousel relative w-full h-full">
     <div class="carousel-track flex transition-transform duration-700 ease-in-out h-full" id="track">
 
       <!-- Slide 1 -->
-      <div class="slide w-full h-full relative">
-        <div class="shine-box w-full h-full">
-          <img src="img/luna.png" alt="Collar de oro">
-          <div class="particles"></div>
-        </div>
-        <div class="overlay">
-          <span>Colecciones en joyeria y Piercings</span>
-          
+      <div class="slide w-full h-full relative flex-shrink-0">
+        <img src="122.png" alt="Collar de oro" class="carousel-img">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <span class="text-white text-2xl md:text-4xl font-bold">Colecciones en joyería y Piercings</span>
         </div>
       </div>
 
       <!-- Slide 2 -->
-      <div class="slide w-full h-full relative">
-        <div class="shine-box w-full h-full">
-          <img src="img/oro/16.jpg" alt="Anillos de oro rosa">
-          <div class="particles"></div>
-        </div>
-        <div class="overlay">
-          <span>Anillos</span>
-         
+      <div class="slide w-full h-full relative flex-shrink-0">
+        <img src="img/oro/16.jpg" alt="Anillos de oro rosa" class="carousel-img">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <span class="text-white text-2xl md:text-4xl font-bold">Anillos</span>
         </div>
       </div>
 
       <!-- Slide 3 -->
-      <div class="slide w-full h-full relative">
-        <div class="shine-box w-full h-full">
-          <img src="img/titanioo/15.jpg" alt="Pulseras de plata">
-          <div class="particles"></div>
-        </div>
-        <div class="overlay">
-          <span>Minimal-oro plateados 50 descuentos en la scompras</span>
-         
+      <div class="slide w-full h-full relative flex-shrink-0">
+        <img src="img/titanioo/15.jpg" alt="Pulseras de plata" class="carousel-img">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center px-4">
+          <span class="text-white text-xl md:text-3xl font-bold text-center">
+            Minimal-oro plateados 50% de descuento en las compras
+          </span>
         </div>
       </div>
 
     </div>
+
+    <!-- Botones -->
+    <button onclick="prevSlide()" 
+            class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#FFD700] text-black px-3 py-1 rounded-full">
+      ‹
+    </button>
+    <button onclick="nextSlide()" 
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#FFD700] text-black px-3 py-1 rounded-full">
+      ›
+    </button>
   </div>
 </section>
 
-<style>
-/* ==== SLIDES ==== */
-.slide {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  flex-shrink: 0;
-}
 
-/* ==== IMAGEN ==== */
-.shine-box {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-.shine-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: filter 0.5s ease-in-out;
-}
-.shine-box.glow img {
-  filter: brightness(1.3) sepia(0.4) hue-rotate(-20deg) saturate(2);
-}
-
-/* ==== PARTÍCULAS ==== */
-.particles {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 2;
-}
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.8;
-}
-@keyframes fall {
-  0%   { transform: translateY(-10px) scale(1); opacity: 1; }
-  100% { transform: translateY(110%) scale(0.5); opacity: 0; }
-}
-@keyframes rise {
-  0%   { transform: translateY(110%) scale(0.5); opacity: 0; }
-  50%  { opacity: 1; }
-  100% { transform: translateY(-20%) scale(1.2); opacity: 0; }
-}
-@keyframes twinkle {
-  0%, 100% { opacity: 0; transform: scale(0.5); }
-  50%      { opacity: 1; transform: scale(1.2); }
-}
-
-/* ==== TEXTO ==== */
-.overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  text-align: center;
-
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: white;
-
-  background: rgba(0, 0, 0, 0.4);
-  z-index: 3;
-}
-.overlay span {
-  opacity: 0;
-  transform: translateY(20px);
-  display: inline-block;
-  transition: all 0.5s ease;
-}
-.overlay span.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+    <!-- Botones -->
+    <button onclick="prevSlide()" 
+            class="absolute left-2 top-1/2 transform -translate-y-1/2 bg-[#FFD700] text-black px-3 py-1 rounded-full">
+      ‹
+    </button>
+    <button onclick="nextSlide()" 
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-[#FFD700] text-black px-3 py-1 rounded-full">
+      ›
+    </button>
+  </div>
+</section>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+  let currentIndex = 0;
   const track = document.getElementById("track");
   const slides = document.querySelectorAll(".slide");
+  const totalSlides = slides.length;
+
+  function updateSlide() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateSlide();
+  }
+
+  function prevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    updateSlide();
+  }
+
+  // Auto-play cada 5 segundos
+  setInterval(nextSlide, 5000);
+</script>
+
+<style>
+
+  /* Todas las imágenes del carrusel */
+/* Todas las imágenes del carrusel */
+.carousel-img {
+  width: 100%;
+  height: 400px;    /* todas iguales */
+  object-fit: cover; /* recorta sin deformar */
+  display: block;
+}
+
+/* Cada slide ocupa lo mismo */
+.slide {
+  width: 100%;
+  height: 400px;   /* igual que las imágenes */
+  flex-shrink: 0;
+  position: relative;
+}
+
+</style>
+<!-- Importar fuente -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:wght@700&display=swap" rel="stylesheet">
+
+<!-- Sección Sobre Nosotros con franja blanca -->
+<section class="bg-white py-16">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-8 items-center">
+
+    <!-- Columna Izquierda: Slider de imágenes -->
+    <div class="relative w-full h-80 overflow-hidden rounded-lg shadow-lg order-2 md:order-1">
+      <img id="sliderImage" 
+           src="img/oro/19.jpg" 
+           alt="Imagen 1"
+           class="w-full h-full object-cover transition-opacity duration-700 ease-in-out">
+    </div>
+
+    <!-- Columna Derecha: Texto -->
+    <div class="text-center md:text-left order-1 md:order-2">
+      <h2 class="text-4xl mb-6"
+          style="color:#343403; font-family:'Playfair Display SC', serif; font-weight:700; letter-spacing:2px;">
+        SOBRE NOSOTROS
+      </h2>
+
+      <p class="text-gray-700 leading-relaxed">
+         <span class="font-semibold text-[#FFD700]"></span> 
+        En <b>Coyote Body Piercings</b> nos especializamos en ofrecer 
+        <b>joyería de alta calidad</b> para piercings. 
+        Contamos con <b>acero quirúrgico</b>, <b>titanio hipoalergénico</b>, 
+        <b>oro</b> y <b>acrílicos seguros</b>, garantizando comodidad, estilo 
+        y total seguridad para tu piel.  
+        Cada pieza está diseñada para que expreses tu identidad con confianza 
+        y el respaldo de un servicio profesional.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Script para cambiar imágenes -->
+<script>
+  const images = ["img/oro/17.jpg", "img/oro/19.jpg"]; // aquí pones las imágenes
   let index = 0;
+  const slider = document.getElementById("sliderImage");
 
-  function createParticles(container) {
-    const particlesContainer = container.querySelector(".particles");
-    if (!particlesContainer) return;
-
-    for (let i = 0; i < 15; i++) {
-      const particle = document.createElement("div");
-      particle.classList.add("particle");
-
-      // color aleatorio (oro o blanco)
-      const colors = ["gold", "white"];
-      particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-      // tamaño aleatorio
-      const size = Math.random() * 6 + 3;
-      particle.style.width = size + "px";
-      particle.style.height = size + "px";
-
-      // posición aleatoria
-      particle.style.left = Math.random() * 100 + "%";
-      particle.style.top = Math.random() * 100 + "%";
-
-      // animación aleatoria
-      const types = ["fall", "rise", "twinkle"];
-      const type = types[Math.floor(Math.random() * types.length)];
-      particle.style.animation = `${type} ${2 + Math.random() * 3}s linear forwards`;
-
-      particlesContainer.appendChild(particle);
-      setTimeout(() => particle.remove(), 5000);
-    }
-  }
-
-  function showSlide(i) {
-    // mover carrusel
-    track.style.transform = `translateX(-${i * 100}%)`;
-
-    // resetear textos
-    slides.forEach(slide => {
-      slide.querySelectorAll(".overlay span").forEach(span => span.classList.remove("active"));
-    });
-
-    // activar textos del slide actual
-    slides[i].querySelectorAll(".overlay span").forEach((span, idx) => {
-      span.style.transitionDelay = `${idx * 0.2}s`;
-      span.classList.add("active");
-    });
-
-    // efecto brillo y partículas
-    const shineBox = slides[i].querySelector(".shine-box");
-    shineBox.classList.add("glow");
-    createParticles(shineBox);
-
-    setTimeout(() => shineBox.classList.remove("glow"), 2000);
-  }
-
-  // mostrar el primero
-  showSlide(index);
-
-  // cambiar cada 5s
   setInterval(() => {
-    index = (index + 1) % slides.length;
-    showSlide(index);
-  }, 5000);
-});
+    index = (index + 1) % images.length;
+    slider.src = images[index];
+  }, 4000); // cada 4 segundos cambia
 </script>
 
 
-  <!-- SECCIONES / CATEGORÍAS -->
-  <!-- SECCIONES / CATEGORÍAS -->
-<!-- SECCIÓN JOYERÍA DE ORO -->
-<!-- SECCIÓN JOYERÍA DE ORO -->
-<section id="oro" class="bg-[#0a0f2c] py-20 w-full"> 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-    
-    <!-- Título y subtítulo -->
-    <div class="section-header mb-12">
-      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE ORO</h2>
-      <span class="section-sub text-xl opacity-90 block mt-2">
-        Brillo y elegancia en piezas exclusivas
-      </span>
-    </div>
 
-    <!-- Grid de productos (clases exclusivas de oro) -->
-    <div class="oro-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-      
-      <!-- Producto -->
-      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Anillo Real" data-price="S/ 850" data-desc="Anillo de oro 18k con incrustaciones de zircon" 
-        data-img="img/oro/1.jpg">
-        <img src="img/oro/1.jpg" alt="Anillo Real de oro 18k"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Anillo Real</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 850</div>
-      </article>
-
-      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Collar Imperial" data-price="S/ 1250" data-desc="Collar de oro con diseño clásico" 
-        data-img="img/oro/2.jpg">
-        <img src="img/oro/2.jpg" alt="Collar Imperial oro 18k"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Collar Imperial</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 1250</div>
-      </article>
-
-      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Aretes Sol" data-price="S/ 650" data-desc="Aretes de oro amarillo con forma solar" 
-        data-img="img/oro/3.jpg">
-        <img src="img/oro/3.jpg" alt="Aretes Sol oro 18k"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Aretes Sol</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 650</div>
-      </article>
-
-      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Pulsera Elegance" data-price="S/ 970" data-desc="Pulsera de oro con eslabones finos" 
-        data-img="img/oro/4.jpg">
-        <img src="img/oro/4.jpg" alt="Pulsera Elegance oro 18k"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Pulsera Elegance</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 970</div>
-      </article>
-
-      <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Sortija Clásica" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/5.jpg">
-        <img src="img/oro/5.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
-       <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="SortijaS" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/6.jpg">
-        <img src="img/oro/6.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
- <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Sortija 7" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/7.jpg">
-        <img src="img/oro/7.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
- <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Sortija8" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/8.jpg">
-        <img src="img/oro/8.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
- <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Sortija9" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/9.jpg">
-        <img src="img/oro/9.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
+<!-- Productos destacados -->
+<!-- Productos destacados -->
+<!-- Productos destacados #b5b6ab-->
+<section class=" py-12 w-full" style="color: #4fb3bb;">
+  <div class="max-w-7xl mx-auto px-4">
+<!-- Importar la fuente -->
 
 
-       <article class="oro-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Sortija10" data-price="S/ 720" data-desc="Sortija de oro con acabado pulido" 
-        data-img="img/oro/10.jpg">
-        <img src="img/oro/10.jpg" alt="Sortija Clásica oro"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Sortija Clásica</div>
-        <div class="p-price text-yellow-600 font-bold">S/ 720</div>
-      </article>
+<!-- Título con fuente personalizada -->
+<!-- Importar la fuente -->
+<!-- Importar la fuente -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+<!-- Título con estilo manuscrito -->
+<h2 class="text-4xl text-center mb-8" 
+    style="color:#f6f6f4; font-family:'Great Vibes', cursive; font-weight:normal;">
+  Productos destacados
+</h2>
 
 
-      <!-- 👉 Repite los demás artículos igual -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center" style="color: #0c052c;">
+      <div class="bg-white rounded-xl shadow-lg p-4 text-center w-full max-w-[12rem]">
+        <img src="img/oro/11.jpg" class="w-full h-40 object-cover rounded-lg"/>
+        <h3 class="mt-3 font-semibold">Aro Oro 11</h3>
+        <p class="font-bold mt-2">S/ 800.00</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-4 text-center w-full max-w-[12rem]">
+        <img src="img/oro/20.jpg" class="w-full h-40 object-cover rounded-lg"/>
+        <h3 class="mt-3 font-semibold">Aro Oro 20</h3>
+        <p class="font-bold mt-2">S/ 200.00</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-4 text-center w-full max-w-[12rem]">
+        <img src="img/titanioo/18.jpg" class="w-full h-40 object-cover rounded-lg"/>
+        <h3 class="mt-3 font-semibold">Aro Titanio 18</h3>
+        <p class="font-bold mt-2">S/ 95.00</p>
+      </div>
+      <div class="bg-white rounded-xl shadow-lg p-4 text-center w-full max-w-[12rem]">
+        <img src="img/titanioo/21.jpg" class="w-full h-40 object-cover rounded-lg"/>
+        <h3 class="mt-3 font-semibold">Aro Titanio 21</h3>
+        <p class="font-bold mt-2">S/ 90.00</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- MODAL EXCLUSIVO ORO -->
-<div id="oroModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
-  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
-    <button id="closeOroModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">
-      <i class="fa fa-times text-xl"></i>
-    </button>
-    <img id="oroImg" src="" alt="" class="w-full h-56 object-cover rounded-md mb-4">
-    <h3 id="oroName" class="text-xl font-bold text-gray-800"></h3>
-    <p id="oroPrice" class="text-yellow-600 font-semibold text-lg mt-2"></p>
-    <p id="oroDesc" class="text-gray-600 mt-3 text-sm"></p>
+</section>
+
+
+<!-- Sección Joyas Premium (Franja Blanca) -->
+<section class="bg-white text-black py-16">
+  <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    
+    <!-- Texto -->
+    <div>
+      <h2 class="text-3xl font-bold text-[#C89F6D] mb-4 uppercase tracking-wide">
+        Descubre
+      </h2>
+      <h3 class="text-5xl font-extrabold mb-6 text-[#1a1a1a] tracking-wider">
+        JOYAS DE LUJO
+      </h3>
+      <p class="text-gray-700 mb-6 leading-relaxed">
+        Vive la experiencia de llevar <span class="text-[#FFD700] font-semibold">oro</span> y 
+        <span class="text-[#4fb3bb] font-semibold">titanio</span> en su máxima expresión.  
+        Diseños exclusivos en piercings, anillos y accesorios pensados para destacar tu esencia única.
+      </p>
+     <a href="#productSection" class="bg-[#FFD700] hover:bg-[#e6c200] text-black font-bold px-8 py-3 rounded-lg shadow-lg transition inline-block">
+  Explorar colección
+</a>
+
+    </div>
+
+    <!-- Galería de imágenes -->
+    <div class="grid grid-cols-2 gap-4">
+      <img src="img/oro/16.jpg" alt="Anillo de oro" class="rounded-lg shadow-md object-cover h-48 w-full">
+      <img src="img/titanioo/15.jpg" alt="Piercing titanio" class="rounded-lg shadow-md object-cover h-48 w-full">
+      <img src="img/oro/18.jpg" alt="Collar de oro" class="rounded-lg shadow-md object-cover h-64 w-full col-span-2">
+    </div>
+
   </div>
-</div>
+</section>
 
-<script>
-// Selecciona solo los productos de oro
-const oroProducts = document.querySelectorAll('.oro-product');
-const oroModal = document.getElementById('oroModal');
-const oroImg = document.getElementById('oroImg');
-const oroName = document.getElementById('oroName');
-const oroPrice = document.getElementById('oroPrice');
-const oroDesc = document.getElementById('oroDesc');
-const closeOroModal = document.getElementById('closeOroModal');
+  <!-- Categorías #004F54;-->
+<!-- Categorías #004F54 -->
+<section class="py-12" style="background-color: #043236;">
+  <h2 class="text-3xl font-bold text-white text-center mb-10">PERFORADORAS CORPORALES</h2>
+  <div class="container mx-auto flex justify-center">
+    <!-- Grid centrado con ancho máximo -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full max-w-md">
 
-// Abrir modal
-oroProducts.forEach(product => {
-  product.addEventListener('click', () => {
-    oroImg.src = product.dataset.img;
-    oroName.textContent = product.dataset.name;
-    oroPrice.textContent = product.dataset.price;
-    oroDesc.textContent = product.dataset.desc;
-    oroModal.classList.remove('hidden');
-    oroModal.classList.add('flex');
-  });
-});
-
-// Cerrar modal
-closeOroModal.addEventListener('click', () => {
-  oroModal.classList.add('hidden');
-  oroModal.classList.remove('flex');
-});
-
-// Cerrar clic afuera
-oroModal.addEventListener('click', (e) => {
-  if (e.target === oroModal) {
-    oroModal.classList.add('hidden');
-    oroModal.classList.remove('flex');
-  }
-});
-</script>
-
- <!-- Font Awesome 6 -->
-</script>
-
-<script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-</head>
-<body class="bg-gray-100">
-
-  <!-- Sección de calidad -->
-  <section class="bg-white py-20 text-center">
-    <h2 class="text-3xl font-bold mb-12 text-[#0a0f2c]">
-      Nuestra Calidad
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12 max-w-6xl mx-auto">
-      
-      <!-- Icono 1 -->
-      <div class="flex flex-col items-center">
-        <div class="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center">
-          <i class="fas fa-gem text-yellow-400 text-3xl"></i>
-        </div>
-        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Piezas únicas</h3>
-        <p class="text-gray-600 text-sm mt-2"></p>
+      <!-- Tarjeta 1 -->
+      <div class="bg-white rounded-xl shadow-lg p-5 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-full">
+        <img src="oreja.jpg" alt="Piercing Oreja" class="w-32 h-32 object-cover rounded-full mb-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Piercing Oreja</h3>
+        <p class="text-gray-600 mb-4">Estilo clásico o industrial, con materiales seguros e hipoalergénicos.</p>
+        <a href="artist-ventoso.html" class="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition">Conoce más</a>
       </div>
 
-      <!-- Icono 2 -->
-      <div class="flex flex-col items-center">
-        <div class="w-20 h-20 rounded-full bg-green-600 flex items-center justify-center">
-          <i class="fas fa-shield-alt text-yellow-400 text-3xl"></i>
-        </div>
-        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Limpieza</h3>
-        <p class="text-gray-600 text-sm mt-2"></p>
+      <!-- Tarjeta 2 -->
+      <div class="bg-white rounded-xl shadow-lg p-5 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 w-full">
+        <img src="nariz.jpg" alt="Piercing Nariz" class="w-32 h-32 object-cover rounded-full mb-4">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">Piercing Nariz</h3>
+        <p class="text-gray-600 mb-4">Perforación lateral o septum, con cuidado profesional.</p>
+        <a href="artist-kiara.html" class="bg-green-700 text-white px-4 py-2 rounded-full hover:bg-green-800 transition">Conoce más</a>
       </div>
 
-      <!-- Icono 3 -->
-      <div class="flex flex-col items-center">
-        <div class="w-20 h-20 rounded-full bg-red-600 flex items-center justify-center">
-          <i class="fas fa-user-friends text-yellow-400 text-3xl"></i>
-        </div>
-        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Confianza</h3>
-        <p class="text-gray-600 text-sm mt-2"></p>
-      </div>
-
-      <!-- Icono 4 -->
-      <div class="flex flex-col items-center">
-        <div class="w-20 h-20 rounded-full bg-purple-600 flex items-center justify-center">
-          <i class="fas fa-star text-yellow-400 text-3xl"></i>
-        </div>
-        <h3 class="mt-4 font-semibold text-lg text-[#0a0f2c]">Calificación</h3>
-        <p class="text-gray-600 text-sm mt-2"></p>
-      </div>
-
-    </div>
-  </section>
-
-  
-
-    
-    <!-- Título y subtítulo -->
-  
-<!-- SECCIÓN NOVEDADES -->
-<section id="novedades" class="bg-[#0a0f2c] py-20 w-full"> 
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-    
-    <!-- Título y subtítulo -->
-    <div class="section-header mb-12">
-      <h2 class="section-title text-4xl font-extrabold">JOYERÍA DE PLATA</h2>
-      <span class="section-sub text-xl opacity-90 block mt-2">
-        Descubre piezas únicas para cada ocasión
-      </span>
-    </div>
-
-    <!-- Grid de productos (clases exclusivas de novedades) -->
-    <div class="novedades-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-      
-      <!-- Producto -->
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/1.jpg">
-        <img src="img/titanioo/1.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel piercing" data-price="S/ 200" data-desc="Con doble gema transparente" 
-        data-img="img/titanioo/2.jpg">
-        <img src="img/titanioo/2.jpg" alt="con doble gema trasnparente"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel piercing</div>
-        <div class="p-price text-blue-600 font-bold">S/ 200</div>
-      </article>
-
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio3" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/3.jpg">
-        <img src="img/titanioo/3.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio4" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/4.jpg">
-        <img src="img/titanioo/4.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio5" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/5.jpg">
-        <img src="img/titanioo/5.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio6" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/6.jpg">
-        <img src="img/titanioo/6.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio7" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/7.jpg">
-        <img src="img/titanioo/7.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio8" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/8.jpg">
-        <img src="img/titanioo/8.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio9" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/9.jpg">
-        <img src="img/titanioo/9.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio10" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/10.jpg">
-        <img src="img/titanioo/10.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio11" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/11.jpg">
-        <img src="img/titanioo/11.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-      
-      <article class="novedades-product bg-white rounded-lg shadow hover:scale-105 transition cursor-pointer p-2"
-        data-name="Navel Titanio12" data-price="S/ 180" data-desc="Con piedras de ópalo y zircon" 
-        data-img="img/titanioo/12.jpg">
-        <img src="img/titanioo/12.jpg" alt=" con piedras de opalo y zircon"
-             class="w-full h-40 object-cover rounded-md">
-        <div class="p-name text-gray-900 font-semibold mt-2">Navel Titanio</div>
-        <div class="p-price text-blue-600 font-bold">S/ 180</div>
-      </article>
-
-      <!-- 👉 Repite los demás artículos con el mismo formato -->
     </div>
   </div>
 </section>
 
-<!-- MODAL EXCLUSIVO NOVEDADES -->
-<div id="novedadesModal" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50">
-  <div class="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
-    <button id="closeNovedadesModal" class="absolute top-3 right-3 text-gray-600 hover:text-black">
-      <i class="fa fa-times text-xl"></i>
-    </button>
-    <img id="novedadesImg" src="" alt="" class="w-full h-56 object-cover rounded-md mb-4">
-    <h3 id="novedadesName" class="text-xl font-bold text-gray-800"></h3>
-    <p id="novedadesPrice" class="text-blue-600 font-semibold text-lg mt-2"></p>
-    <p id="novedadesDesc" class="text-gray-600 mt-3 text-sm"></p>
-  </div>
-</div>
 
-<script>
-// Selecciona solo los productos de novedades
-const novedadesProducts = document.querySelectorAll('.novedades-product');
-const novedadesModal = document.getElementById('novedadesModal');
-const novedadesImg = document.getElementById('novedadesImg');
-const novedadesName = document.getElementById('novedadesName');
-const novedadesPrice = document.getElementById('novedadesPrice');
-const novedadesDesc = document.getElementById('novedadesDesc');
-const closeNovedadesModal = document.getElementById('closeNovedadesModal');
 
-// Abrir modal
-novedadesProducts.forEach(product => {
-  product.addEventListener('click', () => {
-    novedadesImg.src = product.dataset.img;
-    novedadesName.textContent = product.dataset.name;
-    novedadesPrice.textContent = product.dataset.price;
-    novedadesDesc.textContent = product.dataset.desc;
-    novedadesModal.classList.remove('hidden');
-    novedadesModal.classList.add('flex');
-  });
-});
 
-// Cerrar modal
-closeNovedadesModal.addEventListener('click', () => {
-  novedadesModal.classList.add('hidden');
-  novedadesModal.classList.remove('flex');
-});
+ <section class="bg-white py-12 w-full  py-12 text-center">
+   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
-// Cerrar clic afuera
-novedadesModal.addEventListener('click', (e) => {
-  if (e.target === novedadesModal) {
-    novedadesModal.classList.add('hidden');
-    novedadesModal.classList.remove('flex');
-  }
-});
-</script>
+<h2 class="text-3xl mb-8" style="font-family:'Playfair Display', serif; color:#3b451f;">
+  Categorías
+</h2>
+    <div class="grid grid-cols-3 gap-12 justify-items-center">
 
-<script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
-</head>
-<body class="bg-gray-100">
-
-  <!-- Sección Encargado -->
-  <section class="bg-white py-16">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12 px-6">
-
-      <!-- Foto encargada -->
-      <div class="flex justify-center">
-        <img id="fotoEncargada" src="img/oro/16.jpg" alt="Encargada" 
-             class="w-80 h-80 object-cover rounded-2xl shadow-lg transition duration-700 ease-in-out">
+      <!-- Oro -->
+      <div onclick="showCategory('oro')" class="cursor-pointer">
+        <img src="img/oro/18.jpg" class="w-48 h-48 object-cover rounded-full border-4 border-[#FFD700] shadow"/>
+        <p class="mt-3 font-semibold" style="font-family:'Playfair Display', serif; color:#232a13;">Joyas de Oro</p>
       </div>
 
-      <!-- Info + Contadores -->
-      <div class="space-y-8">
-        <h2 class="text-3xl font-bold text-[#0a0f2c]">Conoce  Nuestros productos</h2>
-        <p class="text-gray-600">
-          En <b>Coyote Body Piercings</b> nos especializamos en ofrecer 
-            <b>joyería de alta calidad</b> para piercings. 
-            Contamos con <b>acero quirúrgico</b>, <b>titanio hipoalergénico</b>, 
-            <b>oro</b> y <b>acrílicos seguros</b>, garantizando comodidad, estilo 
-            y total seguridad para tu piel.  
-            Cada pieza está diseñada para que expreses tu identidad con confianza 
-            y el respaldo de un servicio profesional.
-          </p>
-       
-        <!-- Contadores -->
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+      <!-- Titanio -->
+      <div onclick="showCategory('titanio')" class="cursor-pointer">
+        <img src="img/titanioo/19.jpg" class="w-48 h-48 object-cover rounded-full border-4 border-[#C89F6D] shadow"/>
+        <p class="mt-3 font-semibold" style="font-family:'Playfair Display', serif; color:#232a13;">Joyas de Titanio</p>
+      </div>
 
-          <!-- Clientes -->
-          <div class="bg-blue-600 p-6 rounded-xl shadow text-white">
-            <i class="fas fa-users text-yellow-400 text-3xl mb-2"></i>
-            <h3 class="text-3xl font-bold counter" data-target="1200">0</h3>
-            <p class="text-sm mt-1">Clientes satisfechos</p>
-          </div>
-
-          <!-- Ventas -->
-          <div class="bg-green-600 p-6 rounded-xl shadow text-white">
-            <i class="fas fa-shopping-cart text-yellow-400 text-3xl mb-2"></i>
-            <h3 class="text-3xl font-bold counter" data-target="3500">0</h3>
-            <p class="text-sm mt-1">Ventas realizadas</p>
-          </div>
-
-          <!-- Experiencia -->
-          <div class="bg-purple-600 p-6 rounded-xl shadow text-white">
-            <i class="fas fa-briefcase text-yellow-400 text-3xl mb-2"></i>
-            <h3 class="text-3xl font-bold counter" data-target="7">0</h3>
-            <p class="text-sm mt-1">Años de experiencia</p>
-          </div>
-
-        </div>
+      <!-- Mostrar Todo -->
+      <div onclick="showAll()" class="cursor-pointer">
+        <img src="img/oro/13.jpg" class="w-48 h-48 object-cover rounded-full border-4 border-gray-500 shadow"/>
+        <p class="mt-3 font-semibold" style="font-family:'Playfair Display', serif; color:#232a13;">Mostrar Todo</p>
       </div>
     </div>
   </section>
 
-  <!-- Script -->
+  <!-- Productos dinámicos    <section id="productSection" class="max-w-7xl mx-auto px-4 py-12 hidden"> -->
+ 
+   <!-- Productos dinámicos -->
+<section id="productSection" class="max-w-7xl mx-auto px-4 py-12 hidden">
+  <h2 id="categoryTitle" class="text-2xl font-bold text-center mb-8"></h2>
+ <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center"></div>
+
+</section>
+
+
+  <!-- Carrito lateral -->
+  <aside id="cartSidebar" class="fixed top-0 right-0 w-80 h-full 
+  bg-white shadow-lg p-6 transform translate-x-full transition-transform duration-300 z-50">
+    <h2 class="text-xl font-bold mb-4">Tu carrito</h2>
+    <div id="cartItems" class="space-y-3 max-h-[70%] overflow-y-auto"></div>
+
+    <div class="mt-4 flex justify-between font-bold">
+      <span>Total:</span>
+      <span id="cartTotal">S/ 0.00</span>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-2">
+      <button onclick="sendWhatsApp()" class="px-4 py-2 bg-green-500 text-white rounded">Enviar por WhatsApp</button>
+      <button onclick="vaciarCarrito()" class="px-4 py-2 bg-red-500 text-white rounded">Vaciar Carrito</button>
+      <button onclick="toggleCart()" class="px-4 py-2 border rounded">Cerrar</button>
+    </div>
+  </aside>
+<!-- Modal para ver imágenes -->
+<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center hidden z-50">
+  <span onclick="closeModal()" class="absolute top-4 right-6 text-white text-3xl cursor-pointer">&times;</span>
+  <img id="modalImage" src="" class="max-w-[90%] max-h-[90%] rounded-lg shadow-lg border-4 border-white"/>
+</div>
+
+
+<script>
+  // ... todo tu JS de antes ...
+
+  function openModal(src) {
+    document.getElementById("modalImage").src = src;
+    document.getElementById("imageModal").classList.remove("hidden");
+  }
+
+  function closeModal() {
+    document.getElementById("imageModal").classList.add("hidden");
+  }
+</script>
+
   <script>
-    // Contadores
-    function iniciarContadores() {
-      const counters = document.querySelectorAll('.counter');
-      counters.forEach(counter => {
-        counter.innerText = '0';
-        const target = +counter.getAttribute('data-target');
-        
-        const updateCounter = () => {
-          const c = +counter.innerText;
-          const increment = target / 200;
+    // Datos
+    const productos = {
+  oro: [
+    { id: "oro1", title: "Aro Oro 1", img: "img/oro/1.jpg", price: 120 },
+    { id: "oro2", title: "Aro Oro 2", img: "img/oro/2.jpg", price: 150 },
+    { id: "oro3", title: "Aro Oro 3", img: "img/oro/3.jpg", price: 180 },
+    { id: "oro4", title: "Aro Oro 4", img: "img/oro/4.jpg", price: 200 },
+    { id: "oro5", title: "Aro Oro 5", img: "img/oro/5.jpg", price: 200 },
+    { id: "oro6", title: "Aro Oro 6", img: "img/oro/6.jpg", price: 200 },
+    { id: "oro7", title: "Aro Oro 7", img: "img/oro/7.jpg", price: 200 },
+    { id: "oro8", title: "Aro Oro 8", img: "img/oro/8.jpg", price: 200 },
+    { id: "oro9", title: "Aro Oro 9", img: "img/oro/9.jpg", price: 200 },
+    { id: "oro10", title: "Aro Oro 10", img: "img/oro/10.jpg", price: 700 },
+    { id: "oro11", title: "Aro Oro 11", img: "img/oro/11.jpg", price: 800 },
+    { id: "oro12", title: "Aro Oro 12", img: "img/oro/12.jpg", price: 200 },
+    { id: "oro13", title: "Aro Oro 13", img: "img/oro/13.jpg", price: 200 },
+    { id: "oro14", title: "Aro Oro 14", img: "img/oro/14.jpg", price: 200 },
+    { id: "oro15", title: "Aro Oro 15", img: "img/oro/15.jpg", price: 200 },
+    { id: "oro16", title: "Aro Oro 16", img: "img/oro/16.jpg", price: 200 },
+    { id: "oro17", title: "Aro Oro 17", img: "img/oro/17.jpg", price: 200 },
+    { id: "oro18", title: "Aro Oro 18", img: "img/oro/18.jpg", price: 200 },
+    { id: "oro19", title: "Aro Oro 19", img: "img/oro/19.jpg", price: 200 },
+    { id: "oro20", title: "Aro Oro 20", img: "img/oro/20.jpg", price: 200 },
+    { id: "oro21", title: "Aro Oro 21", img: "img/oro/21.jpg", price: 200 },
+  ],
+  titanio: [
+    { id: "titanio1", title: "Aro Titanio 1", img: "img/titanioo/1.jpg", price: 90 },
+    { id: "titanio2", title: "Aro Titanio 2", img: "img/titanioo/2.jpg", price: 95 },
+    { id: "titanio3", title: "Aro Titanio 3", img: "img/titanioo/3.jpg", price: 100 },
+    { id: "titanio4", title: "Aro Titanio 4", img: "img/titanioo/4.jpg", price: 110 },
+     { id: "titanio5", title: "Aro Titanio 5", img: "img/titanioo/5.jpg", price: 90 },
+    { id: "titanio6", title: "Aro Titanio 6", img: "img/titanioo/6.jpg", price: 95 },
+    { id: "titanio7", title: "Aro Titanio 7", img: "img/titanioo/7.jpg", price: 100 },
+    { id: "titanio8", title: "Aro Titanio 8", img: "img/titanioo/8.jpg", price: 110 },
+     { id: "titanio9", title: "Aro Titanio 9", img: "img/titanioo/9.jpg", price: 90 },
+    { id: "titanio10", title: "Aro Titanio 10", img: "img/titanioo/10.jpg", price: 95 },
+    { id: "titanio11", title: "Aro Titanio 11", img: "img/titanioo/11.jpg", price: 100 },
+    { id: "titanio12", title: "Aro Titanio 12", img: "img/titanioo/12.jpg", price: 110 },
+     { id: "titanio13", title: "Aro Titanio 13", img: "img/titanioo/13.jpg", price: 90 },
+    { id: "titanio14", title: "Aro Titanio 14", img: "img/titanioo/14.jpg", price: 95 },
+    { id: "titanio15", title: "Aro Titanio 15", img: "img/titanioo/15.jpg", price: 100 },
+    { id: "titanio16", title: "Aro Titanio 16", img: "img/titanioo/16.jpg", price: 110 },
+     { id: "titanio17", title: "Aro Titanio 17", img: "img/titanioo/17.jpg", price: 90 },
+    { id: "titanio18", title: "Aro Titanio 18", img: "img/titanioo/18.jpg", price: 95 },
+    { id: "titanio19", title: "Aro Titanio 19", img: "img/titanioo/19.jpg", price: 100 },
+    { id: "titanio20", title: "Aro Titanio 20", img: "img/titanioo/20.jpg", price: 110 },
+     { id: "titanio21", title: "Aro Titanio 21", img: "img/titanioo/21.jpg", price: 90 },
+    { id: "titanio22", title: "Aro Titanio 22", img: "img/titanioo/22.jpg", price: 95 },
+    { id: "titanio23", title: "Aro Titanio 23", img: "img/titanioo/23.jpg", price: 100 },
+    { id: "titanio24", title: "Aro Titanio 24", img: "img/titanioo/24.jpg", price: 110 },
+     { id: "titanio25", title: "Aro Titanio 25", img: "img/titanioo/25.jpg", price: 100 },
+    { id: "titanio26", title: "Aro Titanio 26", img: "img/titanioo/26.jpg", price: 110 },
+  ]
+};
 
-          if (c < target) {
-            counter.innerText = Math.ceil(c + increment);
-            setTimeout(updateCounter, 20);
-          } else {
-            counter.innerText = target;
-          }
-        };
+    // Mostrar categoría
+    function showCategory(cat){
+      renderProducts(productos[cat], "Productos - " + (cat === "oro" ? "Oro" : "Titanio"));
+    }
 
-        updateCounter();
+    function showAll(){
+      const all = [...productos.oro, ...productos.titanio];
+      renderProducts(all, "Todos los productos");
+    }
+
+    function renderProducts(lista, titulo){
+      document.getElementById("productSection").classList.remove("hidden");
+      document.getElementById("categoryTitle").textContent = titulo;
+
+      categoryTitle.style.color = "white";
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = "";
+
+      lista.forEach(prod => {
+        grid.innerHTML += `
+          <div class="bg-white rounded-xl shadow-lg p-4 text-center w-60">
+         <img src="${prod.img}" onclick="openModal('${prod.img}')" 
+           class="w-full h-40 object-cover rounded-lg cursor-pointer"/>
+
+            <h3 class="mt-3 font-semibold">${prod.title}</h3>
+            <p class="font-bold mt-2">S/ ${prod.price.toFixed(2)}</p>
+            <div class="flex items-center justify-center gap-2 mt-3">
+              <button onclick="changeQty('${prod.title}',-1)" class="px-2 py-1 border rounded">-</button>
+              <span id="qty-${prod.title}" class="w-8 inline-block">1</span>
+              <button onclick="changeQty('${prod.title}',1)" class="px-2 py-1 border rounded">+</button>
+            </div>
+            <div class="flex gap-2 justify-center mt-3">
+              <button onclick="addToCart('${prod.title}','${prod.img}',${prod.price})" 
+              class="px-3 py-2 bg-[#FFD700] text-black rounded-lg hover:bg-[#C89F6D] hover:text-white">Agregar</button>
+             <a href="producto.html?id=${prod.id}" 
+   class="px-3 py-2 border rounded-lg hover:bg-[#C89F6D] hover:text-white">
+   Ver más
+</a>
+
+            </div>
+          </div>
+        `;
       });
     }
 
-    iniciarContadores();
-    setInterval(iniciarContadores, 7000);
+    // Cantidad antes de agregar
+    const tempQty = {};
+    function changeQty(title,delta){
+      if(!tempQty[title]) tempQty[title] = 1;
+      tempQty[title] = Math.max(1, tempQty[title] + delta);
+      document.getElementById("qty-"+title).textContent = tempQty[title];
+    }
 
-    // Cambio de foto
-    const fotos = ["img/oro/1.jpg", "img/oro/17.jpg"]; // <-- tus dos fotos
-    let indexFoto = 0;
-    const img = document.getElementById("fotoEncargada");
+    // Carrito
+    function addToCart(title,img,price){
+      let qty = tempQty[title] || 1;
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let found = cart.find(x => x.title === title);
+      if(found){ found.qty += qty; }
+      else { cart.push({title,img,price,qty}); }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      tempQty[title] = 1;
+      updateCartCount();
+      alert("Producto agregado al carrito!");
+    }
 
-    setInterval(() => {
-      indexFoto = (indexFoto + 1) % fotos.length;
-      img.src = fotos[indexFoto];
-    }, 5000); // cambia cada 5 segundos
+    function toggleCart(){
+      const cartSidebar = document.getElementById("cartSidebar");
+      cartSidebar.classList.toggle("translate-x-full");
+      renderCart();
+    }
+
+    function renderCart(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cartItems");
+      container.innerHTML = "";
+      let total = 0;
+
+      if(cart.length === 0){
+        container.innerHTML = "<p>El carrito está vacío.</p>";
+      } else {
+        cart.forEach((item,index) => {
+          total += item.price * item.qty;
+          container.innerHTML += `
+            <div class="flex items-center gap-3 border-b pb-2">
+              <img src="${item.img}" class="w-12 h-12 object-cover rounded"/>
+              <div class="flex-1">
+                <p class="font-semibold">${item.title}</p>
+                <p>S/ ${(item.price * item.qty).toFixed(2)}</p>
+                <div class="flex items-center gap-2">
+                  <button onclick="updateCartQty(${index},-1)" class="px-2 border rounded">-</button>
+                  <span>${item.qty}</span>
+                  <button onclick="updateCartQty(${index},1)" class="px-2 border rounded">+</button>
+                  <button onclick="removeFromCart(${index})" class="ml-2 text-red-500">✕</button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      document.getElementById("cartTotal").textContent = "S/ " + total.toFixed(2);
+    }
+
+    function updateCartQty(index,delta){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart[index].qty = Math.max(1, cart[index].qty + delta);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      updateCartCount();
+    }
+
+    function removeFromCart(index){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index,1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      updateCartCount();
+    }
+
+    function vaciarCarrito(){
+      localStorage.removeItem("cart");
+      renderCart();
+      updateCartCount();
+    }
+
+    function updateCartCount(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let count = cart.reduce((acc,item)=>acc+item.qty,0);
+      document.getElementById("cartCount").textContent = count;
+    }
+
+    function sendWhatsApp(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if(cart.length === 0){
+        alert("El carrito está vacío");
+        return;
+      }
+      let mensaje = "🛒 *Pedido Cheyenne Tattoo Store*%0A%0A";
+      let total = 0;
+      cart.forEach(item=>{
+        mensaje += `• ${item.title} (x${item.qty}) - S/ ${(item.price*item.qty).toFixed(2)}%0A`;
+        total += item.price*item.qty;
+      });
+      mensaje += `%0A*Total: S/ ${total.toFixed(2)}*`;
+
+      let url = "https://wa.me/51999999999?text=" + mensaje; // Cambia tu número
+      window.open(url,"_blank");
+    }
+
+    // Inicializar contador
+    updateCartCount();
+
+    // Inicializar: mostrar todo al cargar<!-
+window.onload = () => {
+  showAll();
+  updateCartCount();
+};
+//<!-- Modal para ver imágenes -->
+
+
   </script>
-  
-  <!-- Footer -->
-<footer style="background:#111; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
-  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
-    
-    <!-- Redes Sociales -->
-    <div style="flex:1; min-width:150px;">
-      <h3 style="margin-bottom:10px; font-size:16px;">Redes Sociales</h3>
-      <a href="https://www.facebook.com/coyotestattoo/?locale=es_LA&_rdc=1&_rdr" target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
-        <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" width="20">
-        Facebook
-      </a>
-      <a href=https://www.instagram.com/coyotesbodypiercing/ target="_blank" style="color:#fff; display:flex; align-items:center; gap:5px; margin:5px 0; text-decoration:none; transition: transform 0.3s;">
-        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" width="20">
-        Instagram
-      </a>
+
+  <section class="py-16 bg-white text-gray-900">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-12">Nuestros Servicios</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/3207/3207952.png" alt="Piercing" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Piercings Profesionales</h3>
+        <p class="text-gray-600">Aplicados con máxima higiene y técnicas modernas para tu seguridad.</p>
+      </div>
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/5892/5892610.png" alt="Tattoo" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Tatuajes Personalizados</h3>
+        <p class="text-gray-600">Diseños únicos hechos a tu medida, desde minimalistas hasta realismo.</p>
+      </div>
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition">
+        <img src="https://cdn-icons-png.flaticon.com/512/3076/3076097.png" alt="Joyas" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Joyas Certificadas</h3>
+        <p class="text-gray-600">Materiales seguros e hipoalergénicos, con estilo y garantía.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 🌙 Footer -->
+
+
+<!-- Agrega esto en el <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- 🌙 Footer -->
+<footer class="bg-gray-900 text-gray-300 mt-12"style="background-color:#162b2d">
+  <div class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-4 gap-8">
+
+    <!-- Logo / Nombre -->
+    <div class="md:col-span-1">
+      <h2 class="text-2xl font-bold text-white mb-3">Coyote's Body Piercing</h2>
+      <p class="text-sm leading-relaxed">
+        🔩 Expertos en body piercing profesional.<br>
+        💎 Joyas seguras & certificadas.<br>
+        📍 Miraflores, Lima 🇵🇪 | +18 años.
+      </p>
+    </div>
+
+    <!-- Enlaces rápidos -->
+    <div>
+      <h3 class="font-semibold text-white mb-4 uppercase tracking-wide">Enlaces</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#reseñas" class="hover:text-[#FFD700] transition-colors">Reseñas</a></li>
+        <li><a href="#productos" class="hover:text-[#FFD700] transition-colors">Productos</a></li>
+        <li><a href="#contacto" class="hover:text-[#FFD700] transition-colors">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Redes sociales -->
+    <div>
+      <h3 class="font-semibold text-white mb-4 uppercase tracking-wide">Síguenos</h3>
+      <ul class="flex space-x-5 text-2xl">
+        <li>
+          <a href="https://wa.me/51900000000" target="_blank" aria-label="WhatsApp" class="hover:text-[#25D366] transition-colors">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook" class="hover:text-[#1877F2] transition-colors">
+            <i class="fab fa-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram" class="hover:text-[#E4405F] transition-colors">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+      </ul>
     </div>
 
     <!-- Mapa -->
-   <!-- Ubicación -->
-<!-- Ubicación Coyotes Tattoo -->
-<div style="flex:2; min-width:200px; text-align:center; margin:10px;">
-  <h3 style="margin-bottom:10px; font-size:16px;">Ubicación</h3>
-  <iframe 
-    src="https://www.google.com/maps?q=C.+Bajada+Balta+127,+Miraflores+15074&output=embed"
-    width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy">
-  </iframe>
-  <p style="margin-top:5px;">C. Bajada Balta 127, Miraflores 15074</p>
-</div>
-
-    <!-- Contacto -->
-    <div style="flex:1; min-width:150px;">
-      <h3 style="margin-bottom:10px; font-size:16px;">Contacto</h3>
-      <p style="margin:2px 0;">Tel: +51 987 654 321</p>
-      <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>
-      <p style="margin:2px 0;">Dirección: Bajada Balta 127 y 135, Lima</p>
+    <div>
+      <h3 class="font-semibold text-white mb-4 uppercase tracking-wide">Ubicación</h3>
+      <div class="rounded-xl overflow-hidden shadow-lg">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3900.857593738444!2d-77.03256538522118!3d-12.123026046929683!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105c82f285c34ff%3A0x8b6c0e0a4c02c57f!2sBajada%20Balta%20127%2C%20Miraflores%2015047%2C%20Per%C3%BA!5e0!3m2!1ses!2spe!4v1696000000000"
+          width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+      <p class="text-xs mt-2 text-gray-400">Bajada Balta 127, 135, Miraflores, Lima</p>
     </div>
 
   </div>
 
-  
+  <!-- Derechos reservados -->
+  <div class="border-t border-gray-700 text-center py-4 text-sm text-gray-500">
+    © 2025 <span class="font-semibold text-white">Coyote's Body Piercing</span>. Todos los derechos reservados.
+  </div>
 </footer>
 
-<!-- CSS para efecto de oscilación -->
-<style>
-  footer a:hover {
-    transform: rotate(-5deg) scale(1.1);
-  }
-</style>
-  <!-- MODAL -->
-  <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-label="Vista rápida del producto">
-    <div class="modal-card" role="document">
-      <button class="close-x" aria-label="Cerrar" onclick="closeModal()">✕</button>
-      <div class="modal-media">
-        <img id="m-img" src="" alt="">
-      </div>
-      <div class="modal-info">
-        <h3 class="modal-title" id="m-title">Título</h3>
-        <div class="modal-price" id="m-price">S/ 0</div>
-        <p class="modal-desc" id="m-desc">Descripción breve del producto.</p>
-        <div class="modal-actions">
-        
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <script>
-    /* ====== CARRUSEL SIMPLE ====== */
-    const track = document.getElementById('track');
-    const slides = Array.from(track.children);
-    let index = 0;
 
-    function updateDots(){
-      const dots = document.getElementById('dots');
-      dots.innerHTML = '';
-      slides.forEach((_, i) => {
-        const d = document.createElement('span');
-        d.className = 'dot' + (i === index ? ' active' : '');
-        dots.appendChild(d);
-      });
-    }
-    function goTo(i){
-      index = (i + slides.length) % slides.length;
-      track.style.transform = `translateX(-${index * 100}%)`;
-      updateDots();
-    }
-    function moveSlide(step){ goTo(index + step); }
-    updateDots();
-    // Auto-play (opcional)
-    let autoplay = setInterval(()=>moveSlide(1), 6000);
-    document.querySelector('.carousel').addEventListener('mouseenter',()=>clearInterval(autoplay));
-    document.querySelector('.carousel').addEventListener('mouseleave',()=>autoplay = setInterval(()=>moveSlide(1), 6000));
 
-    /* ====== MODAL: VISTA RÁPIDA ====== */
-    const modal = document.getElementById('modal');
-    const mImg = document.getElementById('m-img');
-    const mTitle = document.getElementById('m-title');
-    const mPrice = document.getElementById('m-price');
-    const mDesc = document.getElementById('m-desc');
 
-    function openModal({img, title, price, desc, alt}){
-      mImg.src = img;
-      mImg.alt = alt || title || 'Producto';
-      mTitle.textContent = title || '';
-      mPrice.textContent = price || '';
-      mDesc.textContent = desc || '';
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.style.overflow='hidden';
-    }
-    function closeModal(){
-      modal.classList.remove('open');
-      modal.setAttribute('aria-hidden','true');
-      document.body.style.overflow='';
-      // Limpieza para evitar que imagenes enormes permanezcan en memoria en móviles
-      setTimeout(()=>{ mImg.src=''; }, 300);
-    }
-    modal.addEventListener('click',(e)=>{ if(e.target === modal) closeModal(); });
-    document.addEventListener('keydown',(e)=>{ if(e.key === 'Escape') closeModal(); });
-
-    // Delegación de eventos: todas las .product abren modal
-    document.addEventListener('click',(e)=>{
-      const card = e.target.closest('.product');
-      if(!card) return;
-      openModal({
-        img: card.dataset.img,
-        title: card.dataset.name,
-        price: card.dataset.price,
-        desc: card.dataset.desc,
-        alt: card.querySelector('img')?.alt
-      });
-    });
-  </script>
-  <script>// Array carrito
-
-</script>
 </body>
 </html>
 
-  
 
 
 
