@@ -1,0 +1,467 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalle de producto - Cheyenne Tattoo Store</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-[#F5F5DC] text-[#1F1F1F] font-sans">
+
+  <!-- Header -->
+  <header class="bg-[#F5F5DC] border-b border-[#C89F6D] shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-6">
+      <h1 class="text-xl font-bold text-[#FFD700]">Cheyenne Tattoo — Store</h1>
+      <button onclick="toggleCart()" class="relative px-4 py-2 bg-[#FFD700] text-black rounded-lg">
+        Carrito
+        <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenido principal -->
+  <main class="max-w-5xl mx-auto px-4 py-12">
+    <div id="productDetail" class="hidden">
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+        <img id="detailImg" src="" class="rounded-lg shadow-lg w-full h-80 object-cover"/>
+        <div>
+          <h2 id="detailTitle" class="text-3xl font-bold mb-3"></h2>
+          <div class="flex text-yellow-500 mb-3">⭐⭐⭐⭐☆</div>
+          <p id="detailDesc" class="text-gray-700 mb-4"></p>
+          <div class="font-bold text-xl mb-4" id="detailPrice"></div>
+
+          <!-- Cantidad -->
+          <label class="block mb-2">Cantidad:</label>
+          <div class="flex items-center gap-3 mb-4">
+            <button onclick="changeQty(-1)" class="px-3 py-1 border rounded">-</button>
+            <span id="detailQty" class="w-8 text-center">1</span>
+            <button onclick="changeQty(1)" class="px-3 py-1 border rounded">+</button>
+          </div>
+
+          <!-- Botones -->
+          <div class="flex gap-3">
+            <button onclick="addDetailToCart()" class="px-4 py-2 bg-[#FFD700] text-black rounded-lg shadow hover:bg-[#C89F6D] hover:text-white">Agregar al carrito</button>
+            <a href="index.html" class="px-4 py-2 border rounded-lg hover:bg-[#C89F6D] hover:text-white">Volver a la tienda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Si no hay producto -->
+    <p id="notFound" class="text-center text-gray-600 hidden">Producto no encontrado.</p>
+  </main>
+
+  <!-- Carrito lateral -->
+  <aside id="cartSidebar" class="fixed top-0 right-0 w-80 h-full bg-white shadow-lg p-6 transform translate-x-full transition-transform duration-300 z-50">
+    <h2 class="text-xl font-bold mb-4">Tu carrito</h2>
+    <div id="cartItems" class="space-y-3 max-h-[70%] overflow-y-auto"></div>
+
+    <div class="mt-4 flex justify-between font-bold">
+      <span>Total:</span>
+      <span id="cartTotal">S/ 0.00</span>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-2">
+      <button onclick="sendWhatsApp()" class="px-4 py-2 bg-green-500 text-white rounded">Enviar por WhatsApp</button>
+      <button onclick="vaciarCarrito()" class="px-4 py-2 bg-red-500 text-white rounded">Vaciar Carrito</button>
+      <button onclick="toggleCart()" class="px-4 py-2 border rounded">Cerrar</button>
+    </div>
+  </aside>
+<!-- Productos relacionados -->
+<section class="max-w-6xl mx-auto py-12 px-4" id="relacionados">
+  <h2 class="text-2xl font-bold mb-6">Productos relacionados</h2>
+  <div id="listaRelacionados" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
+</section>
+
+<script>
+  function renderRelacionados(selectedId) {
+    const lista = document.getElementById("listaRelacionados");
+    lista.innerHTML = "";
+
+    // Unir todos los productos de todas las categorías en un solo array
+    const allProducts = Object.values(productos).flat();
+
+    // Excluir el producto actual
+    const relacionados = allProducts.filter(p => p.id !== selectedId);
+
+    // Tomar 4 al azar
+    const mezclados = relacionados.sort(() => 0.5 - Math.random()).slice(0, 4);
+
+    // Pintar las tarjetas
+    mezclados.forEach(p => {
+      lista.innerHTML += `
+        <div class="border rounded-lg shadow hover:shadow-lg transition p-3 bg-white">
+          <img src="${p.img}" alt="${p.title}" class="w-full h-40 object-cover rounded mb-3">
+          <h3 class="font-semibold">${p.title}</h3>
+          <p class="text-gray-600 text-sm mb-2">S/ ${p.price.toFixed(2)}</p>
+          <a href="producto.html?id=${p.id}" 
+             class="block text-center bg-[#FFD700] text-black px-3 py-2 rounded hover:bg-[#C89F6D] hover:text-white">
+            Ver detalle
+          </a>
+        </div>
+      `;
+    });
+  }
+
+  // Cuando cargue la página, mostrar relacionados
+  window.addEventListener("load", () => {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (id) {
+      renderRelacionados(id);
+    }
+  });
+</script>
+<!-- Reseñas de productos -->
+<section class="max-w-6xl mx-auto py-12 px-4" id="reseñas">
+  <h2 class="text-2xl font-bold mb-6">Reseñas de clientes</h2>
+
+  <!-- Lista de reseñas -->
+  <div id="listaReseñas" class="space-y-6"></div>
+
+  <!-- Formulario nueva reseña -->
+  <div class="mt-8 border-t pt-6">
+    <h3 class="font-semibold mb-3">Escribe tu reseña</h3>
+    <form id="formReseña" class="space-y-4">
+      <input type="text" id="nombre" placeholder="Tu nombre" required
+        class="w-full border rounded px-3 py-2"/>
+      
+      <!-- ⭐ Nuevo campo para estrellas -->
+      <select id="estrellas" required class="w-full border rounded px-3 py-2">
+        <option value="">Selecciona estrellas</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <textarea id="comentario" placeholder="Escribe tu comentario..." required
+        class="w-full border rounded px-3 py-2"></textarea>
+      <button type="submit"
+        class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-[#C89F6D] hover:text-white">
+        Publicar
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+  // ⭐ Reseñas de ejemplo con imágenes
+  let reseñas = [
+    { nombre: "Lucía", comentario: "Excelente calidad y entrega rápida.", estrellas: 5, img: "img/oro/10.jpg", likes: 4 },
+    { nombre: "Carlos", comentario: "Me encantó el acabado del producto.", estrellas: 4, img: "img/oro/11.jpg", likes: 2 },
+    { nombre: "María", comentario: "Muy buena atención al cliente.", estrellas: 5, img: "img/titanioo/12.jpg", likes: 3 }
+  ];
+
+  // ⭐ Renderizar reseñas
+  function mostrarReseñas() {
+    const lista = document.getElementById("listaReseñas");
+    lista.innerHTML = "";
+
+    reseñas.forEach((r, i) => {
+      const div = document.createElement("div");
+      div.className = "border rounded-lg p-4 bg-white shadow";
+
+      div.innerHTML = `
+        <div class="flex items-center gap-3">
+          ${r.img ? `<img src="${r.img}" alt="Foto reseña" class="w-16 h-16 rounded object-cover">` : ""}
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="text-yellow-500">${"★".repeat(r.estrellas)}${"☆".repeat(5-r.estrellas)}</span>
+              <p class="font-semibold">${r.nombre}</p>
+            </div>
+            <p class="text-gray-400 text-sm">${new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
+        <p class="mt-2 text-gray-700">${r.comentario}</p>
+        <button onclick="likeReseña(${i})" class="mt-2 text-sm text-blue-500 hover:underline">
+          👍 Me gusta (${r.likes})
+        </button>
+      `;
+      lista.appendChild(div);
+    });
+  }
+
+  // ⭐ Like reseña
+  function likeReseña(index) {
+    reseñas[index].likes++;
+    mostrarReseñas();
+  }
+
+  // ⭐ Formulario reseñas
+  const form = document.getElementById("formReseña");
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    const nombre = document.getElementById("nombre").value;
+    const estrellas = parseInt(document.getElementById("estrellas").value);
+    const comentario = document.getElementById("comentario").value;
+
+    if (!nombre || !estrellas || !comentario) {
+      alert("Por favor completa todos los campos");
+      return;
+    }
+
+    reseñas.push({
+      nombre,
+      comentario,
+      estrellas,
+      img: null, // 👈 el usuario no sube imagen
+      likes: 0
+    });
+
+    mostrarReseñas();
+    form.reset();
+  });
+
+  // ⭐ Inicializar
+  mostrarReseñas();
+</script>
+
+<!-- 🌙 Footer -->
+<footer class="bg-gray-900 text-gray-300 mt-12">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+    
+    <!-- Logo / Nombre -->
+    <div>
+      <h2 class="text-xl font-bold text-white mb-2">Mi Tienda</h2>
+      <p class="text-sm">Calidad y confianza en cada producto. 💎</p>
+    </div>
+
+    <!-- Enlaces rápidos -->
+    <div>
+      <h3 class="font-semibold text-white mb-3">Enlaces</h3>
+      <ul class="space-y-2 text-sm">
+        <li><a href="#reseñas" class="hover:text-[#FFD700]">Reseñas</a></li>
+        <li><a href="#productos" class="hover:text-[#FFD700]">Productos</a></li>
+        <li><a href="#contacto" class="hover:text-[#FFD700]">Contacto</a></li>
+      </ul>
+    </div>
+
+    <!-- Redes sociales -->
+    <div>
+      <h3 class="font-semibold text-white mb-3">Síguenos</h3>
+      <div class="flex gap-4 text-xl">
+        <a href="#" class="hover:text-[#FFD700]"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="hover:text-[#FFD700]"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-[#FFD700]"><i class="fab fa-tiktok"></i></a>
+        <a href="#" class="hover:text-[#FFD700]"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Derechos reservados -->
+  <div class="border-t border-gray-700 text-center py-4 text-sm text-gray-400">
+    © 2025 Mi Tienda. Todos los derechos reservados.
+  </div>
+</footer>
+
+<!-- 👇 Agrega FontAwesome para los íconos -->
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+
+  <script>
+    // --- Catálogo (igual que en index.html) ---
+    const productos = {
+      oro: [
+        { id: "oro1", title: "Aro Oro 1", img: "img/oro/1.jpg", price: 120, desc: "Aro delicado en oro de 18k, perfecto para perforaciones elegantes." },
+        { id: "oro2", title: "Aro Oro 2", img: "img/oro/2.jpg", price: 150, desc: "Diseño clásico en oro amarillo, ideal para uso diario." },
+        { id: "oro3", title: "Aro Oro 3", img: "img/oro/3.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro4", title: "Aro Oro 4", img: "img/oro/4.jpg", price: 200, desc:
+         "Diseño moderno en oro con detalles exclusivos." },
+         { id: "oro5", title: "Aro Oro 5", img: "img/oro/5.jpg", price: 120, desc: "Aro delicado en oro de 18k, perfecto para perforaciones elegantes." },
+        { id: "oro6", title: "Aro Oro 6", img: "img/oro/6.jpg", price: 150, desc: "Diseño clásico en oro amarillo, ideal para uso diario." },
+        { id: "oro7", title: "Aro Oro 7", img: "img/oro/7.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro8", title: "Aro Oro 8", img: "img/oro/8.jpg", price: 200, 
+        desc: "Diseño moderno en oro con detalles exclusivos." },
+           { id: "oro9", title: "Aro Oro 9", img: "img/oro/9.jpg", price: 120, desc: "Aro delicado en oro de 18k, perfecto para perforaciones elegantes." },
+        { id: "oro10", title: "Aro Oro 10", img: "img/oro/10.jpg", price: 150, desc: "Diseño clásico en oro amarillo, ideal para uso diario." },
+        { id: "oro11", title: "Aro Oro 11", img: "img/oro/11.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro12", title: "Aro Oro 12", img: "img/oro/12.jpg", price: 200, 
+        desc: "Diseño moderno en oro con detalles exclusivos." },
+           { id: "oro13", title: "Aro Oro 13", img: "img/oro/13.jpg", price: 120, desc: "Aro delicado en oro de 18k, perfecto para perforaciones elegantes." },
+        { id: "oro14", title: "Aro Oro 14", img: "img/oro/14.jpg", price: 150, desc: "Diseño clásico en oro amarillo, ideal para uso diario." },
+        { id: "oro15", title: "Aro Oro 15", img: "img/oro/15.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro16", title: "Aro Oro 16", img: "img/oro/16.jpg", price: 200, 
+        desc: "Diseño moderno en oro con detalles exclusivos." },   { id: "oro5", title: "Aro Oro 5", img: "img/oro/5.jpg", price: 120, desc: "Aro delicado en oro de 18k, perfecto para perforaciones elegantes." },
+        { id: "oro17", title: "Aro Oro 17", img: "img/oro/17.jpg", price: 150, desc: "Diseño clásico en oro amarillo, ideal para uso diario." },
+        { id: "oro18", title: "Aro Oro 18", img: "img/oro/18.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro19", title: "Aro Oro 19", img: "img/oro/19.jpg", price: 200, 
+        desc: "Diseño moderno en oro con detalles exclusivos." },
+         { id: "oro20", title: "Aro Oro 20", img: "img/oro/20.jpg", price: 180, desc: "Aro en oro pulido con acabado premium." },
+        { id: "oro21", title: "Aro Oro 21", img: "img/oro/21.jpg", price: 200, 
+        desc: "Diseño moderno en oro con detalles exclusivos." }
+     
+      ],
+      titanio: [
+        { id: "titanio1", title: "Aro Titanio 1", img: "img/titanioo/1.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio2", title: "Aro Titanio 2", img: "img/titanioo/2.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio3", title: "Aro Titanio 3", img: "img/titanioo/3.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio4", title: "Aro Titanio 4", img: "img/titanioo/4.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+          { id: "titanio5", title: "Aro Titanio 5", img: "img/titanioo/5.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio6", title: "Aro Titanio 6", img: "img/titanioo/6.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio7", title: "Aro Titanio 7", img: "img/titanioo/7.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio8", title: "Aro Titanio 8", img: "img/titanioo/8.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+          { id: "titanio9", title: "Aro Titanio 9", img: "img/titanioo/9.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio10", title: "Aro Titanio 10", img: "img/titanioo/10.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio11", title: "Aro Titanio 11", img: "img/titanioo/11.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio12", title: "Aro Titanio 12", img: "img/titanioo/12.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+          { id: "titanio13", title: "Aro Titanio 13", img: "img/titanioo/13.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio14", title: "Aro Titanio 14", img: "img/titanioo/14.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio15", title: "Aro Titanio 15", img: "img/titanioo/15.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio16", title: "Aro Titanio 16", img: "img/titanioo/16.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+          { id: "titanio17", title: "Aro Titanio 17", img: "img/titanioo/17.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio18", title: "Aro Titanio 18", img: "img/titanioo/18.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio19", title: "Aro Titanio 19", img: "img/titanioo/19.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio20", title: "Aro Titanio 20", img: "img/titanioo/20.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+          { id: "titanio21", title: "Aro Titanio 21", img: "img/titanioo/21.jpg", price: 90, desc: "Aro hipoalergénico en titanio de alta calidad." },
+        { id: "titanio22", title: "Aro Titanio 22", img: "img/titanioo/22.jpg", price: 95, desc: "Ligero y resistente, ideal para todo tipo de piel." },
+        { id: "titanio23", title: "Aro Titanio 23", img: "img/titanioo/23.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio24", title: "Aro Titanio 24", img: "img/titanioo/24.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." },
+         { id: "titanio25", title: "Aro Titanio 25", img: "img/titanioo/25.jpg", price: 100, desc: "Acabado mate en titanio quirúrgico." },
+        { id: "titanio26", title: "Aro Titanio 26", img: "img/titanioo/26.jpg", price: 110, 
+        desc: "Estilo minimalista en titanio premium." }
+      ]
+    };
+
+    // --- Buscar producto según id en URL ---
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+    let selectedProduct = null;
+
+    for (const cat in productos) {
+      const found = productos[cat].find(p => p.id === productId);
+      if (found) {
+        selectedProduct = found;
+        break;
+      }
+    }
+
+    if (selectedProduct) {
+      document.getElementById("productDetail").classList.remove("hidden");
+      document.getElementById("detailImg").src = selectedProduct.img;
+      document.getElementById("detailTitle").textContent = selectedProduct.title;
+      document.getElementById("detailPrice").textContent = "S/ " + selectedProduct.price.toFixed(2);
+      document.getElementById("detailDesc").textContent = selectedProduct.desc;
+    } else {
+      document.getElementById("notFound").classList.remove("hidden");
+    }
+
+    // --- Cantidad ---
+    let detailQty = 1;
+    function changeQty(delta){
+      detailQty = Math.max(1, detailQty + delta);
+      document.getElementById("detailQty").textContent = detailQty;
+    }
+
+    // --- Carrito ---
+    function addDetailToCart(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let found = cart.find(x => x.title === selectedProduct.title);
+      if(found){ found.qty += detailQty; }
+      else { cart.push({...selectedProduct, qty: detailQty}); }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert("Producto agregado al carrito!");
+    }
+
+    function toggleCart(){
+      const cartSidebar = document.getElementById("cartSidebar");
+      cartSidebar.classList.toggle("translate-x-full");
+      renderCart();
+    }
+
+    function renderCart(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const container = document.getElementById("cartItems");
+      container.innerHTML = "";
+      let total = 0;
+
+      if(cart.length === 0){
+        container.innerHTML = "<p>El carrito está vacío.</p>";
+      } else {
+        cart.forEach((item,index) => {
+          total += item.price * item.qty;
+          container.innerHTML += `
+            <div class="flex items-center gap-3 border-b pb-2">
+              <img src="${item.img}" class="w-12 h-12 object-cover rounded"/>
+              <div class="flex-1">
+                <p class="font-semibold">${item.title}</p>
+                <p>S/ ${(item.price * item.qty).toFixed(2)}</p>
+                <div class="flex items-center gap-2">
+                  <button onclick="updateCartQty(${index},-1)" class="px-2 border rounded">-</button>
+                  <span>${item.qty}</span>
+                  <button onclick="updateCartQty(${index},1)" class="px-2 border rounded">+</button>
+                  <button onclick="removeFromCart(${index})" class="ml-2 text-red-500">✕</button>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+      }
+      document.getElementById("cartTotal").textContent = "S/ " + total.toFixed(2);
+    }
+
+    function updateCartQty(index,delta){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart[index].qty = Math.max(1, cart[index].qty + delta);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      updateCartCount();
+    }
+
+    function removeFromCart(index){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index,1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+      updateCartCount();
+    }
+
+    function vaciarCarrito(){
+      localStorage.removeItem("cart");
+      renderCart();
+      updateCartCount();
+    }
+
+    function updateCartCount(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let count = cart.reduce((acc,item)=>acc+item.qty,0);
+      document.getElementById("cartCount").textContent = count;
+    }
+
+    function sendWhatsApp(){
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      if(cart.length === 0){
+        alert("El carrito está vacío");
+        return;
+      }
+      let mensaje = "🛒 *Pedido Cheyenne Tattoo Store*%0A%0A";
+      let total = 0;
+      cart.forEach(item=>{
+        mensaje += `• ${item.title} (x${item.qty}) - S/ ${(item.price*item.qty).toFixed(2)}%0A`;
+        total += item.price*item.qty;
+      });
+      mensaje += `%0A*Total: S/ ${total.toFixed(2)}*`;
+
+      let url = "https://wa.me/51999999999?text=" + mensaje; // Cambia tu número
+      window.open(url,"_blank");
+    }
+
+    // Inicializar contador
+    updateCartCount();
+
+
+    
+  </script>
+</body>
+</html>
