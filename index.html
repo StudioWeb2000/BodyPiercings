@@ -1,5 +1,3 @@
-
-  
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,29 +7,41 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body style="background-color:#162b2d; color:#0c052c; font-family:sans-serif;">
-
-
-
-  <!-- Header #0c2451a4  #4fb3bb #040c1ca4  , -->
-   <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
 
 <header class="bg-[#F5DEB3] border-b border-[#C89F6D] shadow">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4">
-    
-    <!-- Logo con título -->
-    <div class="flex items-center gap-3">
-      <img src="logo coyotes tattoo.png" alt="Logo Cheyenne" class="w-20 h-20 object-contain"style="color:#0a0a0a;"> 
-      <h1 class="text-2xl" style="font-family: 'Rubik Wet Paint', cursive; color:#f0eeee;">
-      Body Piercings
-      </h1>
-    </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
 
-    <!-- Botón carrito -->
-    <button onclick="toggleCart()" class="relative px-4 py-2 bg-[#FFD700] text-black rounded-lg"style="color:#fffdfd;">
-      Carrito
-      <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
-    </button>
+    <!-- Fila: logo + botones -->
+    <div class="flex justify-between items-center w-full">
 
+      <!-- Logo con texto debajo -->
+      <div class="flex flex-col items-center">
+        <img src="logo coyotes tattoo.png" 
+             alt="Logo Cheyenne" 
+             class="w-20 h-20 sm:w-24 sm:h-24 object-contain">
+        <h1 class="text-sm sm:text-2xl mt-1" 
+            style="font-family: 'Rubik Wet Paint', cursive; color:#f0eeee;">
+        Coyote's Body Piercing
+        </h1>
+      </div>
+
+      <!-- Botones al costado del logo -->
+      <div class="flex gap-3 items-center">
+        <!-- Buscar -->
+        <button onclick="openSearch()" 
+          class="p-2 bg-[#4fb3bb] text-white rounded-full">
+          🔍
+        </button>
+
+        <!-- Carrito -->
+        <button onclick="toggleCart()" 
+          class="relative p-2 bg-[#FFD700] text-black rounded-full">
+          🛒
+          <span id="cartCount" 
+                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
+        </button>
 
 <!-- Botón de búsqueda en el header (solo ícono) -->
 
@@ -94,16 +104,17 @@
   }
 </script>
 
-<button onclick="openSearch()" 
-  class="p-2 bg-[#4fb3bb] text-white rounded-full ml-4">
-  🔍
-  <span>Buscar</span>
-</button>
+  <!-- Buscar -->
+     <!-- Menú hamburguesa -->
+      <!-- Texto Body Piercings debajo -->
     <!-- Menú hamburguesa -->
-    <button id="menuBtn" class="text-3xl text-[#C89F6D] focus:outline-none ml-4"style="color:#fffdfd;">
-      ☰
-    </button>
-    
+        <button id="menuBtn" 
+          class="text-2xl text-[#C89F6D]">
+          ☰
+        </button>
+      </div>
+    </div>
+
   </div>
 </header>
 
@@ -255,25 +266,17 @@
     </div>
 
     <!-- Columna Derecha: Texto -->
-    <div class="text-center md:text-left order-1 md:order-2">
-      <h2 class="text-4xl mb-6"
-          style="color:#343403; font-family:'Playfair Display SC', serif; font-weight:700; letter-spacing:2px;">
-        SOBRE NOSOTROS
-      </h2>
+     <section id="sobre-nosotros" class="py-12"></section>
+  <div class="text-center md:text-left order-1 md:order-2"> <h2 class="text-4xl mb-6" 
+    style="color:#343403; font-family:'Playfair Display SC', serif; font-weight:700; letter-spacing:2px;"> 
+    SOBRE NOSOTROS </h2> <p class="text-gray-700 leading-relaxed"> <span class="font-semibold text-[#FFD700]">
 
-      <p class="text-gray-700 leading-relaxed">
-         <span class="font-semibold text-[#FFD700]"></span> 
-        En <b>Coyote Body Piercings</b> nos especializamos en ofrecer 
-        <b>joyería de alta calidad</b> para piercings. 
-        Contamos con <b>acero quirúrgico</b>, <b>titanio hipoalergénico</b>, 
-        <b>oro</b> y <b>acrílicos seguros</b>, garantizando comodidad, estilo 
-        y total seguridad para tu piel.  
-        Cada pieza está diseñada para que expreses tu identidad con confianza 
-        y el respaldo de un servicio profesional.
-      </p>
-    </div>
-  </div>
-</section>
+    </span> En <b>Coyote Body Piercings</b> nos especializamos en ofrecer <b>joyería de alta calidad</b> 
+    para piercings. Contamos con <b>acero quirúrgico</b>, <b>titanio hipoalergénico</b>, <b>oro</b> y <b>
+      acrílicos seguros</b>, garantizando comodidad, estilo y total seguridad para tu piel. Cada pieza está
+       diseñada para que expreses tu identidad con confianza y 
+    el respaldo de un servicio profesional. </p> </div> </div> </section>
+
 
 <!-- Script para cambiar imágenes -->
 <script>
@@ -564,8 +567,9 @@
               <button onclick="changeQty('${prod.title}',1)" class="px-2 py-1 border rounded">+</button>
             </div>
             <div class="flex gap-2 justify-center mt-3">
-              <button onclick="addToCart('${prod.title}','${prod.img}',${prod.price})" 
-              class="px-3 py-2 bg-[#FFD700] text-black rounded-lg hover:bg-[#C89F6D] hover:text-white">Agregar</button>
+             <button onclick="addToCart('${prod.title}','${prod.img}',${prod.price})" 
+  class="btn-agregar">Agregar</button>
+
              <a href="producto.html?id=${prod.id}" 
    class="px-3 py-2 border rounded-lg hover:bg-[#C89F6D] hover:text-white">
    Ver más
@@ -576,6 +580,7 @@
         `;
       });
     }
+
 
     // Cantidad antes de agregar
     const tempQty = {};
@@ -693,6 +698,65 @@ window.onload = () => {
 
 
   </script>
+  <style>
+  /* Botón Agregar */
+  .btn-agregar {
+    background-color: #f4f4f1;  /* Dorado */
+    color: black;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .btn-agregar:hover {
+    background-color: #f9f7f6; /* Dorado oscuro */
+    color: rgb(13, 13, 13);
+  }
+
+  .btn-agregar:active {
+    background-color: #fbfaf6; /* Marrón dorado */
+    color: rgb(10, 10, 10);
+  }
+
+  .btn-agregar:focus {
+    outline: none;
+    background-color: #f1f0ef;
+    color: rgb(7, 7, 7);
+  }
+</style>
+</style>
+  <style>
+  /* Siempre 2 columnas */
+  #productGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;              /* Espacio entre tarjetas */
+    justify-items: center;  /* Centrar las tarjetas */
+  }
+
+  /* Ajuste de cada tarjeta */
+  #productGrid > div {
+    width: 100%;        /* que ocupe toda su celda */
+    max-width: 200px;   /* ancho máximo para no deformar */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 12px;
+    text-align: center;
+  }
+
+  /* Imagen del producto */
+  #productGrid img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+</style>
+</style>
 
   <section class="py-16 bg-white text-gray-900">
   <div class="max-w-7xl mx-auto px-6 text-center">
@@ -745,9 +809,10 @@ window.onload = () => {
     <div>
       <h3 class="font-semibold text-white mb-4 uppercase tracking-wide">Enlaces</h3>
       <ul class="space-y-2 text-sm">
-        <li><a href="#reseñas" class="hover:text-[#FFD700] transition-colors">Reseñas</a></li>
-        <li><a href="#productos" class="hover:text-[#FFD700] transition-colors">Productos</a></li>
-        <li><a href="#contacto" class="hover:text-[#FFD700] transition-colors">Contacto</a></li>
+        <li><a href="#sobre-nosotros" class="hover:text-[#FFD700] transition-colors">Sobre Nosotros</a></li>
+
+        <li><a href="#productSection" class="hover:text-[#FFD700] transition-colors">Productos</a></li>
+       
       </ul>
     </div>
 
@@ -799,7 +864,3 @@ window.onload = () => {
 
 </body>
 </html>
-
-
-
-
