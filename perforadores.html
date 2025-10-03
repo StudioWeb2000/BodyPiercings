@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coyotes Tattoo — Donde el arte cobra vida</title>
+  <title>  Coyote's Body Piercing</title>
+
   <meta name="description" content="Tatuajes y piercings únicos en Miraflores, Lima. Profesionales, seguros y artísticos." />
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    /* Lightbox */
+    /* Lightbox   Coyotes Tattoo — Donde el arte cobra vida*/
     #lightbox {
       display:none;
       position: fixed;
@@ -73,32 +74,42 @@
 <body class="bg-white text-gray-900">
 
   <!-- Navbar -->
-  <header class="sticky top-0 z-40 border-b" style="background-color:#0a0f2c; border-color:#0a0f2c;">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center py-4">
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="logo coyotes tattoo.png" alt="Logo" class="w-10 h-10 rounded object-cover">
-          <div class="font-semibold text-white">Coyotes Tattoo</div>
-        </a>
-        <button id="menuBtn" class="md:hidden p-2 border rounded">☰</button>
-      </div>
-      <div id="mobileMenu" class="md:hidden hidden pb-4">
-        <div class="grid gap-2 text-sm">
-          <a href="#facebook" class="py-2">Facebook</a>
-        </div>
-      </div>
+<header class="sticky top-0 z-40 border-b" style="background-color: #162b2d; border-color:#0a0f2c;">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <a href="index.html" class="flex items-center gap-3">
+        <img src="logo coyotes tattoo.png" alt="Logo" class="w-24 h-24 object-contain">
+        <div class="font-semibold text-white">Coyote's Body Piercing</div>
+      </a>
+      <a href="index.html" class="px-4 py-2 border rounded-lg text-white hover:bg-white hover:text-black transition">
+        ← Volver
+      </a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <!-- Sección Equipo -->
+<!-- HERO / PORTADA -->
+<section class="relative bg-black text-white">
+  <img src="122.png" alt="Coyote Tattoo" class="w-full h-[80vh] object-cover opacity-60">
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-4">Arte, seguridad y estilo</h1>
+    <p class="text-lg md:text-xl mb-6">Piercings y tatuajes únicos en Miraflores</p>
+    <a href="#contacto" class="px-6 py-3 bg-yellow-400 text-black font-semibold rounded-lg shadow hover:bg-yellow-500 transition">
+      Agendar cita
+    </a>
+  </div>
+</section>
+
+<!-- Sección Equipo -->
   <section id="team" class="py-16 bg-white text-gray-900">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 class="text-4xl font-extrabold text-center mb-12">Nuestro Equipo</h2>
       <div class="flex flex-wrap justify-center gap-10">
 
         <!-- Artista Angela -->
-        <div onclick="openArtist('angela')" class="cursor-pointer rounded-xl p-6 transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl w-64 text-center">
-          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#0a0f2c;">
+        <div onclick="openArtist('angela')" class="cursor-pointer rounded-xl p-6 transform transition duration-300 
+        hover:-translate-y-2 hover:shadow-2xl w-64 text-center">
+          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#162b2d;">
             <img src="img/oro/1.jpg" class="w-full h-full rounded-full object-cover" alt="Angela">
           </div>
           <h3 class="mt-6 text-xl font-semibold">ANGELA</h3>
@@ -107,7 +118,7 @@
 
         <!-- Artista Kiara -->
         <div onclick="openArtist('kiara')" class="cursor-pointer rounded-xl p-6 transform transition duration-300 hover:-translate-y-2 hover:shadow-2xl w-64 text-center">
-          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#0a0f2c;">
+          <div class="w-36 h-36 mx-auto rounded-full border-4 flex items-center justify-center" style="border-color:#162b2d;">
             <img src="img/titanioo/16.jpg" class="w-full h-full rounded-full object-cover" alt="Kiara">
           </div>
           <h3 class="mt-6 text-xl font-semibold">KIARA</h3>
@@ -121,7 +132,8 @@
   <!-- Modal detalle artista -->
 <!-- Modal detalle artista -->
 <div id="artistModal" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 overflow-y-auto">
-  <div class="bg-gray-900 text-white w-full h-full sm:h-auto sm:max-w-5xl rounded-none sm:rounded-2xl overflow-y-auto p-6 relative shadow-2xl mx-0 sm:mx-2 my-0 sm:my-8">
+  <div class="bg-gray-900 text-white w-full h-full sm:h-auto sm:max-w-5xl rounded-none sm:rounded-2xl overflow-y-auto
+   p-6 relative shadow-2xl mx-0 sm:mx-2 my-0 sm:my-8">
     
     <!-- Botón de cerrar fijo -->
     <button onclick="closeArtist()" 
@@ -235,9 +247,65 @@ document.getElementById("artistModal").addEventListener("click", function(e){
     });
   </script>
 
+<style>#artistModal > div {
+  background-color: #162b2d; /* rojo vivo */
+  color: white;
+}
+</style>
+
+<!-- SERVICIOS -->
+<section class="py-16 text-gray-900" style="background-color:#162b2d; color:white;">
+  <div class="max-w-7xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-bold mb-12">Nuestros Servicios</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition bg-white text-gray-900">
+        <img src="https://cdn-icons-png.flaticon.com/512/3207/3207952.png" alt="Piercing" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Piercings Profesionales</h3>
+        <p class="text-gray-600">Aplicados con máxima higiene y técnicas modernas para tu seguridad.</p>
+      </div>
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition bg-white text-gray-900">
+        <img src="https://cdn-icons-png.flaticon.com/512/5892/5892610.png" alt="Tattoo" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Tatuajes Personalizados</h3>
+        <p class="text-gray-600">Diseños únicos hechos a tu medida, desde minimalistas hasta realismo.</p>
+      </div>
+
+      <div class="p-6 rounded-xl shadow-lg hover:shadow-2xl transition bg-white text-gray-900">
+        <img src="https://cdn-icons-png.flaticon.com/512/3076/3076097.png" alt="Joyas" class="w-16 mx-auto mb-4">
+        <h3 class="text-xl font-semibold mb-2">Joyas Certificadas</h3>
+        <p class="text-gray-600">Materiales seguros e hipoalergénicos, con estilo y garantía.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- CATÁLOGO DESTACADO -->
+<section class="py-16 bg-gray-100">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Catálogo Destacado</h2>
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="relative group overflow-hidden rounded-lg shadow-lg">
+        <img src="img/oro/13.jpg" alt="Piercing oro" class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+      </div>
+      <div class="relative group overflow-hidden rounded-lg shadow-lg">
+        <img src="img/titanioo/17.jpg" alt="Tattoo minimalista" class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+      </div>
+      <div class="relative group overflow-hidden rounded-lg shadow-lg">
+        <img src="img/titanioo/19.jpg" alt="Piercing titanio" class="w-full h-64 object-cover group-hover:scale-110 transition duration-300">
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 
 <!-- SECCIÓN DE ESTADÍSTICAS -->
-<section class="bg-black text-white py-16 flex justify-center items-center">
+<section class="bg-black text-white py-16 flex justify-center items-center" style="background-color:#162b2d;">
   <div class="bg-gray-900 rounded-2xl shadow-2xl p-10 w-full max-w-3xl text-center">
     <h2 class="text-3xl font-bold mb-10">Nuestros Logros</h2>
 
@@ -306,9 +374,74 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+<!-- RESEÑAS -->
+<section class="py-16 bg-white text-black">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-3xl font-bold text-center mb-12">Lo que dicen nuestros clientes</h2>
+
+    <!-- Carrusel -->
+    <div id="testimonialCarousel" class="relative overflow-hidden">
+      <div class="carousel-track">
+        <div class="carousel-item bg-gray-100 p-6 rounded-xl shadow-lg">
+          <p class="italic mb-4">“El mejor lugar para piercings, todo súper higiénico y seguro. Volveré sin duda.”</p>
+          <h4 class="font-semibold">— Mariana R.</h4>
+        </div>
+
+        <div class="carousel-item bg-gray-100 p-6 rounded-xl shadow-lg">
+          <p class="italic mb-4">“Me hicieron un tatuaje increíble, justo como lo soñaba. 100% recomendado.”</p>
+          <h4 class="font-semibold">— José P.</h4>
+        </div>
+
+        <div class="carousel-item bg-gray-100 p-6 rounded-xl shadow-lg">
+          <p class="italic mb-4">“La atención es excelente y las joyas son de primera calidad. Muy profesionales.”</p>
+          <h4 class="font-semibold">— Andrea C.</h4>
+        </div>
+
+        <!-- 🔽 Aquí puedes agregar hasta 10 reseñas -->
+        <div class="carousel-item bg-gray-100 p-6 rounded-xl shadow-lg">
+          <p class="italic mb-4">“Los mejores tatuadores, se nota la experiencia y la pasión por el arte.”</p>
+          <h4 class="font-semibold">— Carlos M.</h4>
+        </div>
+
+        <div class="carousel-item bg-gray-100 p-6 rounded-xl shadow-lg">
+          <p class="italic mb-4">“Muy buena asesoría, me ayudaron a escoger la joya ideal para mí.”</p>
+          <h4 class="font-semibold">— Sofía L.</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  #testimonialCarousel {
+    height: 220px; /* ajusta a la altura de tus reseñas */
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+  }
+  .carousel-item {
+    min-width: 100%; /* cada item ocupa todo el ancho */
+    box-sizing: border-box;
+  }
+</style>
+
+<script>
+  const track = document.querySelector(".carousel-track");
+  const items = document.querySelectorAll(".carousel-item");
+  let index = 0;
+
+  function showNextTestimonial() {
+    index = (index + 1) % items.length; 
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+
+  setInterval(showNextTestimonial, 8000); // cada 8 segundos
+</script>
 
   <!-- Footer -->
-<footer style="background:#111; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
+<footer style="background:#162b2d; color:#fff; padding:30px 20px; margin-top:50px; display:flex; justify-content:space-around; flex-wrap:wrap;">
   <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:flex-start; gap:20px;">
     
     <!-- Redes Sociales -->
@@ -336,17 +469,17 @@ document.addEventListener("DOMContentLoaded", () => {
   <p style="margin-top:5px;">C. Bajada Balta 127, Miraflores 15074</p>
 </div>
 
-    <!-- Contacto -->
+    <!-- Contacto    <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>-->
     <div style="flex:1; min-width:150px;">
       <h3 style="margin-bottom:10px; font-size:16px;">Contacto</h3>
       <p style="margin:2px 0;">Tel: +51 987 654 321</p>
-      <p style="margin:2px 0;">Email: contacto@coyotestattoo.com</p>
+     
       <p style="margin:2px 0;">Dirección: Bajada Balta 127 y 135, Lima</p>
     </div>
 
   </div>
 
-  <p style="text-align:center; margin-top:15px; font-size:12px;">&copy; 2025 Coyote Tattoo Perú</p>
+  <p style="text-align:center; margin-top:15px; font-size:12px;">&copy; 2025  Coyote's Body Piercing</p>
 </footer>
 
 <!-- CSS para efecto de oscilación -->
