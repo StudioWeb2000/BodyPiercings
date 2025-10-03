@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Detalle de producto - Cheyenne Tattoo Store</title>
+  <title>Coyote's Body Piercing</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-[#F5F5DC] text-[#1F1F1F] font-sans">
@@ -12,7 +11,7 @@
   <!-- Header -->
   <header class="bg-[#F5F5DC] border-b border-[#C89F6D] shadow">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-6">
-      <h1 class="text-xl font-bold text-[#FFD700]">Cheyenne Tattoo — Store</h1>
+      <h1 class="text-xl font-bold text-[#FFD700]">Coyote's Body Piercing</h1>
       <button onclick="toggleCart()" class="relative px-4 py-2 bg-[#FFD700] text-black rounded-lg">
         Carrito
         <span id="cartCount" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2">0</span>
@@ -41,13 +40,44 @@
 
           <!-- Botones -->
           <div class="flex gap-3">
-            <button onclick="addDetailToCart()" class="px-4 py-2 bg-[#FFD700] text-black rounded-lg shadow hover:bg-[#C89F6D] hover:text-white">Agregar al carrito</button>
+           <button onclick="addDetailToCart()" class="btn-agregar">
+    Agregar al carrito
+  </button>
             <a href="index.html" class="px-4 py-2 border rounded-lg hover:bg-[#C89F6D] hover:text-white">Volver a la tienda</a>
           </div>
         </div>
       </div>
     </div>
+<style>
+  /* Botón Agregar (usado en todos lados) */
+  .btn-agregar {
+    background-color: #f1f0ed;  /* Dorado */
+    color: black;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
 
+  .btn-agregar:hover {
+    background-color: #f1efec; /* Dorado oscuro */
+    color: rgb(8, 8, 8);
+  }
+
+  .btn-agregar:active {
+    background-color: #f7f5f1; /* Marrón dorado */
+    color: rgb(4, 4, 4);
+  }
+
+  .btn-agregar:focus {
+    outline: none;
+    background-color: #f2f1f1;
+    color: rgb(5, 5, 5);
+  }
+</style>
+</style>
     <!-- Si no hay producto -->
     <p id="notFound" class="text-center text-gray-600 hidden">Producto no encontrado.</p>
   </main>
